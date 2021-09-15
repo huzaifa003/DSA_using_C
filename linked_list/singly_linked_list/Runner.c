@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include <conio.h>
-#include "Singly.h"
+#include "Node.h"
 
 int main()
 {

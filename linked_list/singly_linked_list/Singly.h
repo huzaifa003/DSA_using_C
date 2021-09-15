@@ -8,19 +8,19 @@ typedef struct Node
     struct Node *next;
 } Node;
 
-Node *head = NULL;
+Node *head = NULL; //initializing head
 
 void insertSingly(int data)
 {
-    if (head == NULL)
+    if (head == NULL) //for first element 
     {
-        head = (Node *)malloc(sizeof(Node));
-        head->data = data;
+        head = (Node *)malloc(sizeof(Node)); //making a new node
+        head->data = data; //inserting data
         head->next = NULL;
     }
     else
     {
-        Node *iterator = head;
+        Node *iterator = head; //iterating till empty node is found
         Node *newNode = (Node *)malloc(sizeof(Node));
         newNode->data = data;
         newNode->next = NULL;

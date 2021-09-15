@@ -29,16 +29,16 @@ void insertSingly(int data)
         {
             iterator = iterator->next;
         }
-        iterator->next = newNode;
+        iterator->next = newNode; //adding node at end
     }
 }
 
 void displaySingly()
 {
-    Node *iterator = head;
+    Node *iterator = head; 
     while (iterator != NULL)
     {
-        printf("Data is %d\n", iterator->data);
+        printf("Data is %d\n", iterator->data); //display data at each node till its null
         iterator = iterator->next;
     }
     printf("-------------------------------------\n");
@@ -47,12 +47,12 @@ void displaySingly()
 int deleteFirstSingly()
 {
     Node *temp = head;
-    if (head != NULL)
+    if (head != NULL)  //changing head
     {
         head = head->next;
         return temp->data;
     }
-    else
+    else 
     {
         return NULL;
     }
@@ -61,18 +61,25 @@ int deleteFirstSingly()
 int deleteLastSingly()
 {
     Node *iterator = head;
-    if (iterator->next == NULL)
+    if (iterator->next == NULL) //for a single element aka only head
     {
         head = NULL;
+        free(head); //freeing memory
+        return iterator->data;
     }
     else
     {
-        while (iterator->next->next != NULL)
+        
+        while (iterator->next->next != NULL) //iterating for multiple elements 
         {
             printf("Data is %d\n", iterator->data);
             iterator = iterator->next;
         }
+        Node *temp = iterator->next;
         iterator->next = NULL;
+        free(iterator->next);
+        return temp->data;
+
     }
 }
 

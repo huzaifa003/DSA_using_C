@@ -4,6 +4,10 @@
 /*
 realloc is used to reallocate memory without loosing data
 this is used to change the size of memory that's allocated by malloac()
+IF GIVEN SIZE IS SMALLER THAN OG SIZE THEN IT'LL SHRINK THE MEMORY
+IF GIVEN SIZE IS GREATER THAN OG SIZE IT'LL CHECK IF IT CAN EXPAND MEMORY.
+IF IT CAN IT'LL EXTEND THE MEMORY 
+IF IT CAN'T IT WILL ALLOCATE ENTIRELY NEW MEMORY AND WIPE THE PREVIOUS ONE BY COPYING THAT DATA INTO NEW ONE
 */
 int main() {
 
@@ -28,5 +32,8 @@ int main() {
 
     printf("Value of previous allocation is  =  %d\nValue of first integer in newly allocated memory is = %d\nValue of Second Integer in newly allocated memory is = %d\n\n",*(ptr + 0) , *(ptr + 1), *(ptr + 2));
     
+
+    ptr = realloc(ptr,1*sizeof(int)); //shrinking memory size
+    printf("Value of First Value after decreasing the size of memory = %d\n\n",*(ptr+0));
     return 0;
 }

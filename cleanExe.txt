@@ -1,0 +1,9 @@
+@ECHO OFF
+echo This script deletes all the exe files from current place
+SET mypath=%~dp0
+echo %mypath:~0,-1%
+dir
+cd /D "%~dp0"
+del /S *.exe
+dir
+PAUSE

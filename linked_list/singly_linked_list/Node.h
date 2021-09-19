@@ -8,6 +8,7 @@ typedef struct Node
     struct Node *next;
 } Node;
 
+int length = 0;
 Node *head = NULL; //initializing head
 
 void insertSingly(int data)
@@ -31,10 +32,12 @@ void insertSingly(int data)
         }
         iterator->next = newNode; //adding node at end
     }
+    length++;
 }
 
 void displaySingly()
 {
+    printf("-------------------------------------\n");
     Node *iterator = head; 
     while (iterator != NULL)
     {
@@ -50,6 +53,7 @@ int deleteFirstSingly()
     if (head != NULL)  //changing head
     {
         head = head->next;
+        length--;
         return temp->data;
     }
     else 
@@ -61,10 +65,16 @@ int deleteFirstSingly()
 int deleteLastSingly()
 {
     Node *iterator = head;
+    if (head == NULL)
+    {
+        return NULL;
+    }
+    
     if (iterator->next == NULL) //for a single element aka only head
     {
         head = NULL;
         free(head); //freeing memory
+        length--;
         return iterator->data;
     }
     else
@@ -77,9 +87,20 @@ int deleteLastSingly()
         }
         Node *temp = iterator->next;
         iterator->next = NULL;
+        length--;
         free(iterator->next);
         return temp->data;
 
     }
+}
+
+int isEmptySingly()
+{
+    return length == 0;
+}
+
+int getLength()
+{
+    return length;
 }
 

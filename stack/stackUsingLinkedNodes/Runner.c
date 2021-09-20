@@ -13,7 +13,7 @@ int main() {
     insertStack(4);
     insertStack(5);
     displayStack();
-    printf("Length of stack is = %d",getLength());
+    printf("Length of stack is = %d",getLengthStack());
     
     getch();
     return 0;

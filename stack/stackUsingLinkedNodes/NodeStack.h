@@ -67,7 +67,7 @@ int isEmptyStack() //returns 1 if length is 0
     return length == 0;
 }
 
-int getLength()
+int getLengthStack()
 {
     return length;
 }

@@ -90,18 +90,22 @@ void displayBackwardsDoubly()
     }
 }
 
-void deleteLastDoubly()
+int deleteLastDoubly()
 {
+    Node* temp = tail;
     tail = tail->prev;
     tail->next = NULL;
     length--;
+    return temp->data;
 }
 
-void deleteFirstDoubly()
+int  deleteFirstDoubly()
 {
+    Node* temp = head;
     head = head->next;
     head->prev = NULL;
     length--;
+    return temp->data;
 }
 
 int getLenghtDoubly()

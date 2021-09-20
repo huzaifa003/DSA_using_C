@@ -1,10 +1,10 @@
 /* perform following operations on array */
 /*  1. Insertion
-¡¦	2. Deletion By Index
-¡¦	3. Deletion By value
-¡¦	4. Searching By Index
-¡¦	5. Searching By Value
-¡¦	6. Traversing
+ï¿½ï¿½	2. Deletion By Index
+ï¿½ï¿½	3. Deletion By value
+ï¿½ï¿½	4. Searching By Index
+ï¿½ï¿½	5. Searching By Value
+ï¿½ï¿½	6. Traversing
 */
 
 #include <stdio.h>
@@ -134,9 +134,10 @@ void delByIndex(int arr[], int s)
 }
 void searchByVal(int arr[], int s)
 {
-    int temp = 0;
+    system("cls");
+    int check = 0;
     int val;
-    printf("Enter the value to be searched: ");
+    printf("Enter the value you want to search: ");
     scanf("%d", &val);
 
     for (int i = 0; i < s; i++)
@@ -148,14 +149,15 @@ void searchByVal(int arr[], int s)
         }
     }
 
-    if (temp == 0)
+    if (check == 0)
     {
         printf("Element Not Found\n");
     }
 }
 void delByVal(int arr[], int s)
 {
-    int temp = 0;
+    system("cls");
+    int check = 0;
     int val;
     printf("Enter the value to delete: ");
     scanf("%d", &val);
@@ -163,30 +165,32 @@ void delByVal(int arr[], int s)
     {
         if (val == arr[i])
         {
-            arr[s] = -1; //placeholder for junk value at the end of the array
             int j;
             for (j = i; j < s; j++)
             {
                 arr[j] = arr[j+1];
             }
-            i--; //checking current index again
-            
             
             printf("Value successfully deleted at index %d\n",i);
-            temp = 1;
-            
+            check = 1;   
+            s--; //reducing size
+            i--; //checking current index again
         }
     }
 
-    if (temp == 0)
+    if (check == 0)
     {
         printf("Element Not Found\n");
     }
+    else
+    {
+        display(arr,s);
+    }
+    
     
 }
 void searchByIndex(int arr[], int s)
 {
-    printf("%d", arr[2]);
     system("cls");
     int loc, c;
     do
@@ -205,13 +209,8 @@ void searchByIndex(int arr[], int s)
 }
 void display(int arr[], int s)
 {
-
     for (int i = 0; i < s; i++)
     {
-        if (arr[i] != -1) //to avoid deleted placeholder value from being displayed from delByVal() method
-        {
-            printf("Value at index %d is : %d\n", i, arr[i]);
-        }
-       
+        printf("Value at index %d is : %d\n", i, arr[i]); //this will have a junk value after deletion because s isn't global nor is pointer used as argument nor function returns int
     }
 }

@@ -31,13 +31,14 @@ void enqueue(int data)
     {
         front = newNode;
         rear = newNode;
-        newNode->next = NULL;
+        
     }
     else
     {
         rear->next = newNode;
         rear = newNode; //using rear part to insert the nodes at the end
     }
+    rear->next = NULL; //making rear's next = NULLs
     length++;
 }
 
@@ -75,17 +76,23 @@ int getLengthQueue()
     return length;
 }
 
+void freeQueue()
+{
+    free(front);
+    free(rear);
+    front = NULL;
+    rear = NULL;
+    length = 0;
+}
 
 void displayQueue()
 {
     Node* temp = front;
-    
-    printf("\n---------------------------------------\n");
-    do
+    printf("\n---------------------------------------\n");   
+    while (temp != NULL)
     {
-
         printf("Data is = %d\n",temp->data);
         temp = temp->next;
-    } while (temp != rear->next);
+    }
     printf("\n---------------------------------------\n");
 }

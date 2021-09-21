@@ -13,19 +13,19 @@
  * FRONT IS USED TO DELETE ELEMENTS
  */
 
-typedef struct Node
+typedef struct NodeQueue
 {
-    struct Node *next;
+    struct NodeQueue *next;
     int data;
-} Node;
+} NodeQueue;
 
-Node *front = NULL; // will be used to remove data or dequeue
-Node *rear = NULL;  //will be used to add data or enqueue
+NodeQueue *front = NULL; // will be used to remove data or dequeue
+NodeQueue *rear = NULL;  //will be used to add data or enqueue
 int length = 0;
 
 void enqueue(int data)
 {
-    Node *newNode = (Node *)malloc(sizeof(Node));
+    NodeQueue *newNode = (NodeQueue *)malloc(sizeof(NodeQueue));
     newNode->data = data;
     if (front == NULL && rear == NULL)
     {
@@ -46,7 +46,7 @@ int dequeue()
 {
     if (front != NULL)
     {
-        Node* temp = front;
+        NodeQueue* temp = front;
         front = front->next; //replacing front with another element
         length--;
         if (length == 0) //if front is null then rear will be null as well so making sure of that
@@ -64,6 +64,27 @@ int dequeue()
     }
 }
 
+NodeQueue* dequeueNode()
+{
+    if (front != NULL)
+    {
+        NodeQueue* temp = front;
+        front = front->next; //replacing front with another element
+        length--;
+        if (length == 0) //if front is null then rear will be null as well so making sure of that
+        {
+        
+            front = NULL;
+            rear = NULL;
+        }
+        
+        return temp; //returning the last node
+    }
+    else
+    {
+        return NULL;
+    }
+}
 
 
 int isEmptyQueue()
@@ -77,7 +98,8 @@ int getLengthQueue()
 }
 
 void freeQueue()
-{
+{ 
+    //freeing memory along with dangling Pointers handling by placing NUll
     free(front);
     free(rear);
     front = NULL;
@@ -87,7 +109,7 @@ void freeQueue()
 
 void displayQueue()
 {
-    Node* temp = front;
+    NodeQueue* temp = front;
     printf("\n---------------------------------------\n");   
     while (temp != NULL)
     {

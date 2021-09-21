@@ -13,18 +13,18 @@
  * Length here is the total length starting from 0
  */
 
-typedef struct Node
+typedef struct stackNode
 {
-    struct Node* next;
+    struct stackNode* next;
     int data;
-}Node;
+}stackNode;
 
-Node* top = NULL;
+stackNode* top = NULL;
 int length = 0;
 
 void insertStack(int data) //inserts a new element on top
 {
-    Node* newNode = (Node *) malloc(sizeof(Node));
+    stackNode* newNode = (stackNode *) malloc(sizeof(stackNode));
     newNode->data = data;
     newNode->next = NULL;
 
@@ -45,7 +45,7 @@ int pop() //removes 1 element from top
     
     if (top != NULL)
     {
-        Node* temp = top;
+        stackNode* temp = top;
         top = top->next; 
         length--;
         return temp->data;
@@ -54,6 +54,22 @@ int pop() //removes 1 element from top
     else
     {
         return (int) NULL;
+    }
+}
+
+stackNode* popNode()
+{
+    if (top != NULL)
+    {
+        stackNode* temp = top;
+        top = top->next; 
+        length--;
+        return temp;
+        
+    }
+    else
+    {
+        return NULL;
     }
 }
 
@@ -72,9 +88,16 @@ int getLengthStack()
     return length;
 }
 
+void freeStack()
+{
+    free(top);
+    top = NULL; //freeing memory along with adding NULL to avoid dangling pointers
+    length = 0;
+}
+
 void displayStack() //not used but just using here for convineance to display stack and debug it
 {
-    Node* temp = top;
+    stackNode* temp = top;
     printf("\n---------------------------------------\n");
     while (temp != NULL)
     {

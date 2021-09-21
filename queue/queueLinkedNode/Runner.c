@@ -37,6 +37,20 @@ int main()
     displayQueue();
     printf("LENGTH AFTER Freeing QUEUE IS = %d", getLengthQueue());
     
+    //inserting again;
+    printf("\n\n\n\nFilling Queue Again\n\n");
+    enqueue(5);
+    enqueue(6);
+    enqueue(7);
+    enqueue(8);
+    displayQueue();
+
+    //popping Node
+    NodeQueue* dequeuedNode = dequeueNode();
+    printf("\nAddress of popped Node is = %d\n",dequeuedNode);
+    printf("\nValue of Popped Node is = %d\n",dequeuedNode->data);
+    free(dequeuedNode);
+    dequeuedNode = NULL; //freeing memory later on
     getch();
     return 0;
 }

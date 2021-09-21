@@ -3,12 +3,12 @@
 #include <stdlib.h>
 //TODO ADD Deletion and Searching Methods!!!
 static int count = 1;
-int insert(int arr[], int size)
+static int size = 0;
+int insert(int arr[])
 {
     count++; //size of array will always be 1 greater than count
     if (count >= size)
     {
-        printf("HELLO");
         size = size + 5; //increasing size
         arr = realloc(arr, size);
     }
@@ -28,32 +28,52 @@ int insert(int arr[], int size)
     return size;
 }
 
-void display(int arr[], int size)
+void display(int arr[])
 {
     for (int i = 0; i < count - 1; i++)
     {
         printf("Element of arr[%d] =  %d\n", i, arr[i]);
     }
 }
+
+int getElementUsingIndex(int arr[], int index)
+{
+    if (index < size)
+    {
+        return arr[index];
+    }
+    else
+    {
+        printf("Index not valid");
+        return 0;
+    }
+       
+}
 int main()
 {
 
     int *arr = (int *)calloc(2, sizeof(int));
-    int size = 2;
+    size = 2;
     int choice;
     while (1)
     {
-        printf("Press 1 to Enter value in Array\nPress 2 to Display Values in Array\n");
+        printf("Press 1 to Enter value in Array\nPress 2 to Display Values in Array\nPress 3 to Get value using Index\n");
         scanf("%d", &choice);
 
         if (choice == 1)
         {
-            size = insert(arr, size);
+            insert(arr);
         }
 
         else if (choice == 2)
         {
-            display(arr, size);
+            display(arr);
+        }
+        else if (choice == 3)
+        {
+            printf("\nEnter the index\n");
+            scanf("%d",&choice);
+            printf("Value at index is = %d", getElementUsingIndex(arr,choice));
         }
         else if (choice == 5)
         {

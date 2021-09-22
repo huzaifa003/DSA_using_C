@@ -62,7 +62,7 @@ void calculateFrequency(char arr[]) //to calculate frequency of each alphabat in
     {
         char lowerCase = toLowerCase(arr[i]); //getting lower case of each character to make sure same case because frequency doesn't take case into account
 
-        if (lowerCase > 'a' && lowerCase < 'z')
+        if (lowerCase >= 'a' && lowerCase <= 'z')
         {
             freq[getIndexLowerCase(lowerCase)]++;
         }

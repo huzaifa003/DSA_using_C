@@ -24,9 +24,9 @@ int main()
     {
 
         fflush(stdin); //flushing buffer for to make sure gets() takes input every time
-        
+
         //--------Menu And User choice--------
-        printf("\nPress 1 to Calculate Frequency\nPress 2 to change case\nPress any other key to exit\n"); 
+        printf("\nPress 1 to Calculate Frequency\nPress 2 to change case\nPress any other key to exit\n");
         choice = getche();
         switch (choice)
         {
@@ -44,7 +44,7 @@ int main()
             break;
 
         default:
-            return 1; //for exiting 
+            return 1; //for exiting
             break;
         }
     }
@@ -57,7 +57,7 @@ void calculateFrequency(char arr[]) //to calculate frequency of each alphabat in
 {
     //------This works by storing frequency of each alphabat into an array where 0th index represents 'a' and so on------
 
-    int freq[26] = {0}; //intialzing local frequency array 
+    int freq[26] = {0};                  //intialzing local frequency array
     for (int i = 0; arr[i] != '\0'; i++) //running loop till escape character is reached
     {
         char lowerCase = toLowerCase(arr[i]); //getting lower case of each character to make sure same case because frequency doesn't take case into account
@@ -65,7 +65,7 @@ void calculateFrequency(char arr[]) //to calculate frequency of each alphabat in
         //----if the character is an alphabat then place it on it's index by getting index using ASCII value in the getIndexLowerCase() function----
         if (lowerCase >= 'a' && lowerCase <= 'z')
         {
-            freq[getIndexLowerCase(lowerCase)]++; 
+            freq[getIndexLowerCase(lowerCase)]++;
         }
     }
 
@@ -79,7 +79,7 @@ char *changeCase(char arr[])
         char lowerCase = toLowerCase(arr[i]); //getting lowercase of alphabat
 
         //if the value was already lower case then we change it to upper case otherwise we assign it to current array
-        if (lowerCase == arr[i]) 
+        if (lowerCase == arr[i])
         {
             arr[i] = toUpperCase(arr[i]); //changing to uppercase & assigning incase it was already lowerCase
         }
@@ -98,7 +98,7 @@ char toLowerCase(char c) //changes uppercase to lowercase
         return (char)((int)c + 32); //changing it to uppercase using ascii value
     }
 
-    else //if it's not an uppercase alphabat then returning the same alphabat 
+    else //if it's not an uppercase alphabat then returning the same alphabat
     {
         return c;
     }
@@ -106,7 +106,7 @@ char toLowerCase(char c) //changes uppercase to lowercase
 
 char toUpperCase(char c) //changes lowercase to uppercase
 {
-    if (c >= 'a' && c <= 'z') 
+    if (c >= 'a' && c <= 'z')
     {
         return (char)((int)c - 32); //returns uppercase only if it was lowercase
     }
@@ -120,9 +120,9 @@ char toUpperCase(char c) //changes lowercase to uppercase
 int getIndexLowerCase(char c) //finding index using character value lowercase
 {
     //--This function assigns 0th index to 'a' by subtracting 'a' ascii value (97) from character given  and so on
-    if (c >= 'a' && c <= 'z') 
+    if (c >= 'a' && c <= 'z')
     {
-        return (int)c - 'a'; //if given letter is lowercase alphabat return the index 
+        return (int)c - 'a'; //if given letter is lowercase alphabat return the index
     }
     else
     {
@@ -135,10 +135,8 @@ void displayFrequency(int freq[])
     printf("\n----Frequency Table---------");
     for (int i = 0; i < 26; i++) //26 for 26 alphabats
     {
-        if (freq[i] > 0) //only those chars whose frequency is non-zero and non negative 
-        {
-            printf("\nLetter '%c' has frequency of %d\n", (char)i + 'a', freq[i]); //printing by reversing the formula of getting index and getting character by using index and printing freq array values besides it
-        }
+
+        printf("\nLetter '%c' has frequency of %d\n", (char)i + 'a', freq[i]); //printing by reversing the formula of getting index and getting character by using index and printing freq array values besides it
     }
     printf("----------------------------\n");
 }

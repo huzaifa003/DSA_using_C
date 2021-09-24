@@ -135,7 +135,6 @@ void displayFrequency(int freq[])
     printf("\n----Frequency Table---------");
     for (int i = 0; i < 26; i++) //26 for 26 alphabats
     {
-
         printf("\nLetter '%c' has frequency of %d\n", (char)i + 'a', freq[i]); //printing by reversing the formula of getting index and getting character by using index and printing freq array values besides it
     }
     printf("----------------------------\n");

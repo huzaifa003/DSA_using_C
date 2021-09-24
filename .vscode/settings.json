@@ -1,5 +1,6 @@
 {
     "files.associations": {
-        "singlylinkedlist.h": "c"
+        "singlylinkedlist.h": "c",
+        "cmath": "c"
     }
 }

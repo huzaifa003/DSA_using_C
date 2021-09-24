@@ -1,6 +1,7 @@
 {
     "files.associations": {
         "singlylinkedlist.h": "c",
-        "cmath": "c"
+        "cmath": "c",
+        "nodestackint.h": "c"
     }
 }

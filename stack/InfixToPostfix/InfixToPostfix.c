@@ -3,7 +3,7 @@
 #include <stdlib.h>
 #include "NodeStackChar.h"
 
-// Algorithm 
+// Algorithm for conversion of INFIX TO POSTFIX
 // 1. Scan the infix expression from left to right. 
 // 2. If the scanned character is an operand, output it. 
 // 3. Else, 
@@ -19,6 +19,15 @@ int isOperand(char c);
 int checkPrecidence(char c);
 
 int  infixToPostFix(char expression[]);
+
+//Algorithm for evaluation postfix expressions. 
+// 1) Create a stack to store operands (or values). 
+// 2) Scan the given expression and do the following for every scanned element. 
+// …..a) If the element is a number, push it into the stack 
+// …..b) If the element is a operator, pop operands for the operator from stack. Evaluate the operator and push the result back to the stack 
+// 3) When the expression is ended, the number in the stack is the final answer 
+
+
 
 int main() {
     
@@ -76,23 +85,23 @@ int infixToPostFix(char expression[])
         }
         else if (expression[i] == '(') //starting bracker is pushed to stack
         {
-            push(expression[i]);
+            pushChar(expression[i]);
         }
         else if (expression[i] == ')') //after encountering closing bracket we iterate until opening one is found
         {
-            while (!isEmptyStack() && peak() != '(')
+            while (!isEmptyCharStack() && peekChar() != '(')
             {
-                output[j] = pop(); //popping all elements until opening bracket is found in stack and appending it to output array
+                output[j] = popChar(); //popping all elements until opening bracket is found in stack and appending it to output array
                 j++;
             }
-                if (!isEmptyStack() && peak() != '(')
+                if (!isEmptyCharStack() && peekChar() != '(')
                 {
                     printf("Hello");
                     return -1;  //invalid expression
                 }
                 else
                 {
-                    pop(); //this will pop that opening bracket we were looking for cause after finding it's closing bracket it's use has ended
+                    popChar(); //this will pop that opening bracket we were looking for cause after finding it's closing bracket it's use has ended
                 }
                 
             
@@ -100,26 +109,26 @@ int infixToPostFix(char expression[])
 
         else 
         { //when an operand is found it's precendance is compared with top element and if it's precedence is smaller then that operand is popped
-            while (!isEmptyStack() && checkPrecidence(expression[i]) <= checkPrecidence(peak())) 
+            while (!isEmptyCharStack() && checkPrecidence(expression[i]) <= checkPrecidence(peekChar())) 
             {
                 // popping all the operands and appending to output which have higher precedance than current one
-                output[j] = pop(); 
+                output[j] = popChar(); 
                 j++; 
             }
 
-            push(expression[i]); //pushing current operand
+            pushChar(expression[i]); //pushing current operand
         }
         
     }
 
-    while (!isEmptyStack())
+    while (!isEmptyCharStack())
     {
         //appending all the remaining elements in the stack to output array
-        output[j] = pop();
+        output[j] = popChar();
         j++;
     }
 
     
     printf("Expression is = %s",output);
-    
+    isEmptyCharStack();
 }

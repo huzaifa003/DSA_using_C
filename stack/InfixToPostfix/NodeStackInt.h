@@ -16,13 +16,13 @@
 typedef struct stackNode
 {
     struct stackNode* next;
-    char data;
+    int data;
 }stackNode;
 
 stackNode* top = NULL;
 int length = 0;
 
-void pushChar(char data) //inserts a new element on top
+void pushInt(int data) //inserts a new element on top
 {
     stackNode* newNode = (stackNode *) malloc(sizeof(stackNode));
     newNode->data = data;
@@ -40,7 +40,7 @@ void pushChar(char data) //inserts a new element on top
     length++;
 }
 
-char popChar() //removes 1 element from top
+int popInt() //removes 1 element from top
 {
     
     if (top != NULL)
@@ -57,7 +57,7 @@ char popChar() //removes 1 element from top
     }
 }
 
-stackNode* popNodeChar()
+stackNode* popNodeInt()
 {
     if (top != NULL)
     {
@@ -73,29 +73,29 @@ stackNode* popNodeChar()
     }
 }
 
-char peekChar() //returns the top element data without removing it 
+int peekInt() //returns the top element data without removing it 
 {
     return top->data;
 }
 
-int isEmptyCharStack() //returns 1 if length is 0
+int isEmptyIntStack() //returns 1 if length is 0
 {
     return length == 0;
 }
 
-int getLengthCharStack()
+int getLengthIntStack()
 {
     return length;
 }
 
-void freeCharStack()
+void freeIntStack()
 {
     free(top);
     top = NULL; //freeing memory along with adding NULL to avoid dangling pointers
     length = 0;
 }
 
-void displayCharStack() //not used but just using here for convineance to display stack and debug it
+void displayIntStack() //not used but just using here for convineance to display stack and debug it
 {
     stackNode* temp = top;
     printf("\n---------------------------------------\n");

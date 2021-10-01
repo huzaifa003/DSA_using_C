@@ -2,18 +2,27 @@
 #include <stdio.h>
 #include <conio.h>
 #include <stdlib.h>
-
+#include <math.h>
 int isOperand(char c);
 int checkPrecidence(char c);
 
 char *infixToPostFix(char expression[]);
+
+
+char isNumber(char c);
+int convertCharToInt(char c);
+int result (int a, int b, char operator);
+
+int calculateResult(char* expression);
+
 int main()
 {
-    char exp[] = "((a+b-c)/(d*e))^3";
+    char exp[] = "1+2*3";
     infixToPostFix(exp);
     getch();
     return 0;
 }
+
 
 int isOperand(char c) //checks if value is an operand or not
 {
@@ -105,5 +114,112 @@ char *infixToPostFix(char expression[])
     }
 
     printf("Expression is = %s", output);
+    printf("\nResult is = %d",calculateResult(output));
+}
+
+char isNumber(char c)
+{
+    if (c >= '0' && c <= '9')
+    {
+        return c;
+    }
+    else
+    {
+        return 'n'; //indicating it's not a number
+    }
     
+}
+int convertCharToInt(char c)
+{
+    if (c >= '0' && c <= '9')
+    {
+        return (int) (c - '0');
+    }
+    else
+    {
+        return -1; //indicating it's not a number
+    }
+    
+}
+int result (int a, int b, char operator)
+{
+    if (operator == '*')
+    {
+        return a*b;
+    }
+
+    else if (operator == '/')
+    {
+        if (b == 0)
+        {
+            return -2;
+        }
+        else
+        {
+            return a/b;
+        }
+        
+    }
+    else if (operator == '+')
+    {
+        return a+b;
+    }
+    else if (operator == '-')
+    {
+        return a-b;
+    }
+
+    else if (operator == '^')
+    {
+        return  (int) (pow(a,b) +0.5); //for power function giving result in double 
+    }
+    else
+    {
+        return -1; //for non operator 
+    }
+}
+
+int calculateResult(char* expression)
+{
+    StackArrayChar stack;
+    stack.top = -1;
+
+    for (int i = 0; expression[i] != '\0'; i++)
+    {
+        char number = isNumber(expression[i]); //checking if given element is a number
+        if (number != 'n') // if it is a number then push it to stack
+        {
+            push(&stack,number);
+        }
+        else
+        {
+            if (stack.top < 1) //if there are less than two operands that means expression is wrong
+            {
+                printf("Invalid Expression");
+                return -2;
+            }
+            else
+            {
+                char op = expression[i];
+                int number1 = convertCharToInt(pop(&stack)) ;
+                int number2 = convertCharToInt(pop(&stack));
+                int calculation  = result(number1,number2,op);
+                if (calculation == -1)
+                {
+                    printf("Wrong Operator");
+                }
+                else
+                {
+                    push(&stack,calculation+'0'); //converting result to char for pushing to char array
+                }
+                
+            }
+
+
+            
+        }
+        
+        
+    }
+    return convertCharToInt(pop(&stack));
 }

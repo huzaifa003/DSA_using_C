@@ -71,14 +71,14 @@ int calculateResult(char* expression)
 {
     for (int i = 0; expression[i] != '\0'; i++)
     {
-        int number = isNumber(expression[i]);
-        if (number != -1)
+        int number = isNumber(expression[i]); //checking if given element is a number
+        if (number != -1) // if it is a number then push it to stack
         {
             pushInt(number);
         }
         else
         {
-            if (getLengthIntStack() < 2)
+            if (getLengthIntStack() < 2) //if there are less than two operands that means expression is wrong
             {
                 printf("Invalid Expression");
                 return -2;

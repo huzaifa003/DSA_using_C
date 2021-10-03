@@ -2,7 +2,7 @@
 #include <conio.h>
 #include <stdlib.h>
 #define SIZE 15
-typedef struct StackArray
+typedef struct StackArrayArray
 {
     int data;
     int max;
@@ -10,7 +10,7 @@ typedef struct StackArray
     char arr[SIZE];
 } StackArrayChar;
 
-void pushCharStack(StackArrayChar* stack, char value)
+void push(StackArrayChar* stack, char value)
 {
     if (stack->top >= SIZE)
     {
@@ -23,7 +23,7 @@ void pushCharStack(StackArrayChar* stack, char value)
     
 }
 
-char popCharStack(StackArrayChar* stack)
+char pop(StackArrayChar* stack)
 {
     if (stack->top == -1)
     {
@@ -39,7 +39,7 @@ char popCharStack(StackArrayChar* stack)
     
 }
 
-char peekCharStack(StackArrayChar* stack)
+char peek(StackArrayChar* stack)
 {
     if (stack->top != -1)
     {
@@ -53,7 +53,7 @@ char peekCharStack(StackArrayChar* stack)
     
 }
 
-void displayCharStack(StackArrayChar* stack)
+void display(StackArrayChar* stack)
 {
     if (stack->top != -1)
     {
@@ -69,9 +69,4 @@ void displayCharStack(StackArrayChar* stack)
     }
     
     
-}
-
-int isEmptyCharStack(StackArrayChar* stack)
-{
-    return stack->top == -1;
 }

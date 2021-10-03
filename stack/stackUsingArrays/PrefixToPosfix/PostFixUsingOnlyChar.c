@@ -1,5 +1,4 @@
 #include "StackArrayChar.h"
-#include "StackArrayInt.h"
 #include <stdio.h>
 #include <conio.h>
 #include <stdlib.h>
@@ -184,15 +183,15 @@ int result (int a, int b, char operator)
 
 int calculateResult(char* expression)
 {
-    StackArrayInt stack; //making int stack
+    StackArrayChar stack; //making int stack
     stack.top = -1;
 
     for (int i = 0; expression[i] != '\0'; i++)
     {
-        int number = isNumber(expression[i]); //checking if given element is a number
+        char number = isNumber(expression[i]); //checking if given element is a number
         if (isNumber(expression[i])) // if it is a number then push it to stack
         {
-            pushIntStack(&stack,expression[i] - '0');
+            pushCharStack(&stack,expression[i] - '0'); //pushing char by converting them to their int counterparts and pushing their ASCII
         }
         else
         {
@@ -204,16 +203,16 @@ int calculateResult(char* expression)
             else
             {
                 char op = expression[i];
-                int number1 = (popIntStack(&stack)) ;
-                int number2 = (popIntStack(&stack));
-                int calculation  = result(number1,number2,op);
+                int number1 = (popCharStack(&stack)) ; //we don't need to change em to int cause we already pushed int ascii codes 198 line#
+                int number2 = (popCharStack(&stack));
+                int calculation  = result(number1,number2,op); //getting the ascii code by multiplying operators ascii code
                 if (calculation == -1)
                 {
                     printf("Wrong Operator");
                 }
                 else
                 {
-                    pushIntStack(&stack,calculation); //converting result to char for pushing to char array
+                    pushCharStack(&stack,calculation); //pushing result to array as well 
                 }
                 
             }
@@ -224,5 +223,5 @@ int calculateResult(char* expression)
         
         
     }
-    return popIntStack(&stack);
+    return popCharStack(&stack);
 }

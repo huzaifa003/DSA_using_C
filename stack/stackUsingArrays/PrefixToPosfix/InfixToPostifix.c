@@ -1,4 +1,5 @@
 #include "StackArrayChar.h"
+#include "StackArrayInt.h"
 #include <stdio.h>
 #include <conio.h>
 #include <stdlib.h>
@@ -9,7 +10,7 @@ int checkPrecidence(char c);
 char *infixToPostFix(char expression[]);
 
 
-char isNumber(char c);
+int isNumber(char c);
 int convertCharToInt(char c);
 int result (int a, int b, char operator);
 
@@ -17,7 +18,7 @@ int calculateResult(char* expression);
 
 int main()
 {
-    char exp[] = "1+2*3";
+    char exp[] = "1+(9*8)";
     infixToPostFix(exp);
     getch();
     return 0;
@@ -72,44 +73,44 @@ char *infixToPostFix(char expression[])
 
         else if (expression[i] == '(')
         {
-            push(&stack, expression[i]); //starting bracker is pushed to stack
+            pushCharStack(&stack, expression[i]); //starting bracker is pushed to stack
             // display(&stack);
         }
 
         else if (expression[i] == ')') //after encountering closing bracket we iterate until opening one is found
         {
-            while (!isEmpty(&stack) && peek(&stack) != '(')
+            while (!isEmptyCharStack(&stack) && peekCharStack(&stack) != '(')
             {
-                output[j] = pop(&stack); //popping all elements until opening bracket is found in stack and appending it to output array
+                output[j] = popCharStack(&stack); //popping all elements until opening bracket is found in stack and appending it to output array
                 j++;
             }
-            if (!isEmpty(&stack) && peek(&stack) != '(')
+            if (!isEmptyCharStack(&stack) && peekCharStack(&stack) != '(')
             {
                 return "-1"; //invalid expression
             }
             else
             {
-                pop(&stack); //this will pop that opening bracket we were looking for cause after finding it's closing bracket it's use has ended
+                popCharStack(&stack); //this will pop that opening bracket we were looking for cause after finding it's closing bracket it's use has ended
             }
         }
 
         else
         { //when an operand is found it's precendance is compared with top element and if it's precedence is smaller then that operand is popped
-            while (!isEmpty(&stack) && checkPrecidence(expression[i]) <= checkPrecidence(peek(&stack)))
+            while (!isEmptyCharStack(&stack) && checkPrecidence(expression[i]) <= checkPrecidence(peekCharStack(&stack)))
             {
                 // popping all the operands and appending to output which have higher precedance than current one
-                output[j] = pop(&stack);
+                output[j] = popCharStack(&stack);
                 j++;
             }
 
-            push(&stack, expression[i]); //pushing current operand
+            pushCharStack(&stack, expression[i]); //pushing current operand
         }
     }
 
-    while (!isEmpty(&stack))
+    while (!isEmptyCharStack(&stack))
     {
         //appending all the remaining elements in the stack to output array
-        output[j] = pop(&stack);
+        output[j] = popCharStack(&stack);
         j++;
     }
 
@@ -117,15 +118,15 @@ char *infixToPostFix(char expression[])
     printf("\nResult is = %d",calculateResult(output));
 }
 
-char isNumber(char c)
+int isNumber(char c)
 {
     if (c >= '0' && c <= '9')
     {
-        return c;
+        return 1;
     }
     else
     {
-        return 'n'; //indicating it's not a number
+        return 0; //indicating it's not a number
     }
     
 }
@@ -181,15 +182,15 @@ int result (int a, int b, char operator)
 
 int calculateResult(char* expression)
 {
-    StackArrayChar stack;
+    StackArrayInt stack; //making int stack
     stack.top = -1;
 
     for (int i = 0; expression[i] != '\0'; i++)
     {
-        char number = isNumber(expression[i]); //checking if given element is a number
-        if (number != 'n') // if it is a number then push it to stack
+        int number = isNumber(expression[i]); //checking if given element is a number
+        if (isNumber(expression[i])) // if it is a number then push it to stack
         {
-            push(&stack,number);
+            pushIntStack(&stack,expression[i] - '0');
         }
         else
         {
@@ -201,8 +202,8 @@ int calculateResult(char* expression)
             else
             {
                 char op = expression[i];
-                int number1 = convertCharToInt(pop(&stack)) ;
-                int number2 = convertCharToInt(pop(&stack));
+                int number1 = (popIntStack(&stack)) ;
+                int number2 = (popIntStack(&stack));
                 int calculation  = result(number1,number2,op);
                 if (calculation == -1)
                 {
@@ -210,7 +211,7 @@ int calculateResult(char* expression)
                 }
                 else
                 {
-                    push(&stack,calculation+'0'); //converting result to char for pushing to char array
+                    pushIntStack(&stack,calculation); //converting result to char for pushing to char array
                 }
                 
             }
@@ -221,5 +222,5 @@ int calculateResult(char* expression)
         
         
     }
-    return convertCharToInt(pop(&stack));
+    return popIntStack(&stack);
 }

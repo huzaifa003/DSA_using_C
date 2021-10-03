@@ -2,15 +2,15 @@
 #include <conio.h>
 #include <stdlib.h>
 #define SIZE 15
-typedef struct StackArray
+typedef struct StackArrayInt
 {
     int data;
     int max;
     int top;
-    char arr[SIZE];
-} StackArrayChar;
+    int arr[SIZE];
+} StackArrayInt;
 
-void pushCharStack(StackArrayChar* stack, char value)
+void pushIntStack(StackArrayInt* stack, int value)
 {
     if (stack->top >= SIZE)
     {
@@ -23,7 +23,7 @@ void pushCharStack(StackArrayChar* stack, char value)
     
 }
 
-char popCharStack(StackArrayChar* stack)
+int popIntStack(StackArrayInt* stack)
 {
     if (stack->top == -1)
     {
@@ -38,8 +38,7 @@ char popCharStack(StackArrayChar* stack)
     }
     
 }
-
-char peekCharStack(StackArrayChar* stack)
+int peekIntStack(StackArrayInt* stack)
 {
     if (stack->top != -1)
     {
@@ -52,14 +51,13 @@ char peekCharStack(StackArrayChar* stack)
     }
     
 }
-
-void displayCharStack(StackArrayChar* stack)
+void displayIntStack(StackArrayInt* stack)
 {
     if (stack->top != -1)
     {
         for (int i = 0; i <= stack->top; i++)
         {
-            printf("\nElement is = %c\n",stack->arr[i]);
+            printf("\nElement is = %d\n",stack->arr[i]);
         }
         
     }
@@ -71,7 +69,7 @@ void displayCharStack(StackArrayChar* stack)
     
 }
 
-int isEmptyCharStack(StackArrayChar* stack)
+int isEmptyIntStack(StackArrayInt* stack)
 {
     return stack->top == -1;
 }

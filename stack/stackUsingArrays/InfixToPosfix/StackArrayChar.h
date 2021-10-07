@@ -10,7 +10,7 @@ typedef struct StackArrayArray
     char arr[SIZE];
 } StackArrayChar;
 
-void push(StackArrayChar* stack, char value)
+void pushCharStack(StackArrayChar* stack, char value)
 {
     if (stack->top >= SIZE)
     {
@@ -23,7 +23,7 @@ void push(StackArrayChar* stack, char value)
     
 }
 
-char pop(StackArrayChar* stack)
+char popCharStack(StackArrayChar* stack)
 {
     if (stack->top == -1)
     {
@@ -39,7 +39,7 @@ char pop(StackArrayChar* stack)
     
 }
 
-char peek(StackArrayChar* stack)
+char peekCharStack(StackArrayChar* stack)
 {
     if (stack->top != -1)
     {
@@ -53,7 +53,7 @@ char peek(StackArrayChar* stack)
     
 }
 
-void display(StackArrayChar* stack)
+void displayCharStack(StackArrayChar* stack)
 {
     if (stack->top != -1)
     {
@@ -69,4 +69,9 @@ void display(StackArrayChar* stack)
     }
     
     
+}
+
+int isEmptyCharStack(StackArrayChar* stack)
+{
+    return stack->top == -1;
 }

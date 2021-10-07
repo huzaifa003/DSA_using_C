@@ -70,3 +70,8 @@ void display(StackArrayChar* stack)
     
     
 }
+
+int isEmpty(StackArrayChar* stack)
+{
+    return stack->arr[stack->top];
+}

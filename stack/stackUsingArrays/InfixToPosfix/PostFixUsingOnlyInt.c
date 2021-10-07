@@ -58,7 +58,7 @@ int checkPrecidence(char c) //returns precedence by number
     }
 }
 
-char *infixToPostFix(char expression[])
+char *infixToPostFix(char expression[]) //each cahracter is read as an ASCII Code
 {
     StackArrayInt stack;
     stack.top = -1;
@@ -197,7 +197,7 @@ int calculateResult(char* expression)
         {
             if (stack.top < 1) //if there are less than two operands that means expression is wrong
             {
-                printf("Invalid Expression");
+                printf("\n---Invalid Expression For Evaluation\n-------");
                 return -2;
             }
             else
@@ -208,7 +208,8 @@ int calculateResult(char* expression)
                 int calculation  = result(number1,number2,op);
                 if (calculation == -1)
                 {
-                    printf("Wrong Operator");
+                    printf("\n-----Wrong type of Operator---Enter int type-----\n");
+                    return -3;
                 }
                 else
                 {

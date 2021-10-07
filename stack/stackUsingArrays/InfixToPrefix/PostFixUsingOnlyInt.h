@@ -9,21 +9,6 @@ int checkPrecidence(char c);
 char *infixToPostFix(char expression[]);
 
 
-int isNumber(char c);
-int convertCharToInt(char c);
-int result (int a, int b, char operator);
-
-int calculateResult(char* expression);
-
-int main()
-{
-    char exp[] = "";
-    printf("Enter the Expression:  ");
-    gets(exp);
-    infixToPostFix(exp);
-    getch();
-    return 0;
-}
 
 
 int isOperand(char c) //checks if value is an operand or not
@@ -63,7 +48,7 @@ char *infixToPostFix(char expression[]) //each cahracter is read as an ASCII Cod
     StackArrayInt stack;
     stack.top = -1;
     int j = 0;
-    char output[50] = {""};
+    static char output[50] = {""};
     for (int i = 0; expression[i] != '\0'; i++)
     {
         if (isOperand(expression[i])) //operand is appended directly to output
@@ -115,114 +100,6 @@ char *infixToPostFix(char expression[]) //each cahracter is read as an ASCII Cod
         j++;
     }
 
-    printf("Expression is = %s", output);
-    printf("\nResult is = %d",calculateResult(output));
-}
-
-int isNumber(char c)
-{
-    if (c >= '0' && c <= '9')
-    {
-        return 1;
-    }
-    else
-    {
-        return 0; //indicating it's not a number
-    }
-    
-}
-int convertCharToInt(char c)
-{
-    if (c >= '0' && c <= '9')
-    {
-        return (int) (c - '0');
-    }
-    else
-    {
-        return -1; //indicating it's not a number
-    }
-    
-}
-int result (int a, int b, char operator)
-{
-    if (operator == '*')
-    {
-        return a*b;
-    }
-
-    else if (operator == '/')
-    {
-        if (b == 0)
-        {
-            return -2;
-        }
-        else
-        {
-            return a/b;
-        }
-        
-    }
-    else if (operator == '+')
-    {
-        return a+b;
-    }
-    else if (operator == '-')
-    {
-        return a-b;
-    }
-
-    else if (operator == '^')
-    {
-        return  (int) (pow(a,b) +0.5); //for power function giving result in double 
-    }
-    else
-    {
-        return -1; //for non operator 
-    }
-}
-
-int calculateResult(char* expression)
-{
-   StackArrayInt stack; //making int stack
-    stack.top = -1;
-
-    for (int i = 0; expression[i] != '\0'; i++)
-    {
-        int number = isNumber(expression[i]); //checking if given element is a number
-        if (isNumber(expression[i])) // if it is a number then push it to stack
-        {
-            pushIntStack(&stack,expression[i] - '0');
-        }
-        else
-        {
-            if (stack.top < 1) //if there are less than two operands that means expression is wrong
-            {
-                printf("\n---Invalid Expression For Evaluation\n-------");
-                return -2;
-            }
-            else
-            {
-                char op = expression[i];
-                int number1 = (popIntStack(&stack)) ;
-                int number2 = (popIntStack(&stack));
-                int calculation  = result(number1,number2,op);
-                if (calculation == -1)
-                {
-                    printf("\n-----Wrong type of Operator---Enter int type-----\n");
-                    return -3;
-                }
-                else
-                {
-                    pushIntStack(&stack,calculation); //converting result to char for pushing to char array
-                }
-                
-            }
-
-
-            
-        }
-        
-        
-    }
-    return popIntStack(&stack);
+    j = '\0';
+    return output;
 }

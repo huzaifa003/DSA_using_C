@@ -19,7 +19,7 @@ int main()
 {
 
     char infix[20];
-    printf("ENTER THE EXPRESSION IN INFIX FORM");
+    printf("ENTER THE EXPRESSION IN INFIX FORM :  ");
     gets(infix);
     printf("The Prefix Expression is = %s", reverseArray(infixToPostFix(reverseExpression(infix))));
     getch();

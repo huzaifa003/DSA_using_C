@@ -83,7 +83,7 @@ void infixToPostfix(char e[50])
         }
         else if(e[i] == ')')
         {
-            while (!isEmpty(stack) && peek(stack) != '(')
+            while (!isEmpty(&stack) && peek(&stack) != '(')
             {
                 postfix[j] = pop(&stack);
                 j++;
@@ -92,7 +92,7 @@ void infixToPostfix(char e[50])
         }
         else
         {
-            while(!isEmpty(stack) && checkPrecedence(e[i]) <= checkPrecedence(peek(stack)))
+            while(!isEmpty(&stack) && checkPrecedence(e[i]) <= checkPrecedence(peek(&stack)))
             {
                 postfix[j] = pop(&stack);
                 j++;
@@ -100,7 +100,7 @@ void infixToPostfix(char e[50])
             push(&stack, e[i]);
         }
     }
-    while (!isEmpty(stack))
+    while (!isEmpty(&stack))
     {
         postfix[j] = pop(&stack);
         j++;

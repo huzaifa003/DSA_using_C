@@ -10,10 +10,11 @@ int main() {
     insertFrontDequeUsingArray(&DequeArray,1);
 
     displayDequeUsingArray(&DequeArray);
-    
-    getch();
 
-    
+    printf("Deleted 1 element from front is = %d\n",deleteFrontDequeUsingArray(&DequeArray));
+    printf("Deleted 1 element from Rear is = %d\n",deleteRearDequeUsingArray(&DequeArray));
+    displayDequeUsingArray(&DequeArray);     //TODO algo for empty isn't working directly
+    getch();
 
     return 0;
 }

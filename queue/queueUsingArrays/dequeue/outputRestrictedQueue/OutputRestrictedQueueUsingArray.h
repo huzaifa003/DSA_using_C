@@ -3,38 +3,37 @@
     * Input restricted Deque is a special type of queue in which insertion is allowed on only 1 end deletion is possible on both sides
 */
 #define SIZE 20
-typedef struct InputRestrictedDequeUsingArray
+typedef struct OutputRestrictedDequeUsingArray
 {
     int front;
     int rear;
     int arr[20];
-} InputRestrictedDequeUsingArray;
+} OutputRestrictedDequeUsingArray;
 
-void initInputRestrictedDequeUsingArray(InputRestrictedDequeUsingArray *queue)
+void initOutputRestrictedDequeUsingArray(OutputRestrictedDequeUsingArray *queue)
 {
     queue->front = -1;
     queue->rear = -1;
 }
 
-int isFullInputRestrictedDequeUsingArray(InputRestrictedDequeUsingArray *queue)
+int isFullOutputRestrictedDequeUsingArray(OutputRestrictedDequeUsingArray *queue)
 {
     return (queue->front == 0 && queue->rear == SIZE - 1) || queue->front == queue->rear + 1;
 }
 
-int isEmptyInputRestrictedDequeUsingArray(InputRestrictedDequeUsingArray *queue)
+int isEmptyOutputRestrictedDequeUsingArray(OutputRestrictedDequeUsingArray *queue)
 {
     return queue->rear == -1 || queue->front == -1;
 }
-void insertRearInputRestrictedDequeUsingArray(InputRestrictedDequeUsingArray *queue, int data) //insertion only on 1 side
+void insertRearOutputRestrictedDequeUsingArray(OutputRestrictedDequeUsingArray *queue, int data) //insertion only on 1 side
 {
-
-    if (isFullInputRestrictedDequeUsingArray(queue))
+    if (isFullOutputRestrictedDequeUsingArray(queue))
     {
         printf("\nQueue is Full\n");
         return;
     }
 
-    else if (isEmptyInputRestrictedDequeUsingArray(queue))
+    else if (isEmptyOutputRestrictedDequeUsingArray(queue))
     {
         queue->rear = 0;
         queue->front = 0;
@@ -53,9 +52,9 @@ void insertRearInputRestrictedDequeUsingArray(InputRestrictedDequeUsingArray *qu
 }
 
 
-int deleteFrontInputRestrictedDequeUsingArray(InputRestrictedDequeUsingArray *queue)
+int deleteFrontOutputRestrictedDequeUsingArray(OutputRestrictedDequeUsingArray *queue) //deletion at only one side
 {
-    if (isEmptyInputRestrictedDequeUsingArray(queue))
+    if (isEmptyOutputRestrictedDequeUsingArray(queue))
     {
         printf("\n-----------Queue is empty and cannot be Dequed-----------\n");
         return -2;
@@ -75,38 +74,41 @@ int deleteFrontInputRestrictedDequeUsingArray(InputRestrictedDequeUsingArray *qu
         }
         
 
-        return queue->arr[queue->front++];
+        return queue->arr[queue->front++]; //incrementing too
     }
 }
 
-int deleteRearInputRestrictedDequeUsingArray(InputRestrictedDequeUsingArray *queue)
+void insertFrontOutputRestrictedDequeUsingArray(OutputRestrictedDequeUsingArray *queue, int data)
 {
-    if (isEmptyInputRestrictedDequeUsingArray(queue))
+    if (isFullOutputRestrictedDequeUsingArray(queue))
     {
-        printf("\n-----------Queue is empty and cannot be Dequed-----------\n");
-        return -2;
+        printf("\nQueue is Full\n");
+        return;
     }
-    else if (queue->front == queue->rear) //in case of a single element 
+
+    else if (isEmptyOutputRestrictedDequeUsingArray(queue))
     {
-        int temp  = queue->arr[queue->front];
-        queue->front = -1;
-        queue->rear = -1;
-        return temp;
+        queue->rear = 0;
+        queue->front = 0;
     }
+
     else
     {
-        if (queue->rear == -1)
+        queue->front--;
+        if (queue->front == -1)
         {
-            queue->rear = SIZE - 1; //making it back to 0 aka linking the last element to first one
+            queue->front = SIZE - 1;
         }
-    
-        return queue->arr[queue->rear--];
     }
+
+    queue->arr[queue->front] = data;
+    
 }
 
-void displayInputRestrictedDequeUsingArray(InputRestrictedDequeUsingArray *queue)
+
+void displayOutputRestrictedDequeUsingArray(OutputRestrictedDequeUsingArray *queue)
 {
-    if (isEmptyInputRestrictedDequeUsingArray(queue))
+    if (isEmptyOutputRestrictedDequeUsingArray(queue))
     {
         printf("\n-----------Queue is empty and cannot be Dequed-----------\n");
         return;

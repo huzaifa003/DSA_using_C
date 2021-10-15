@@ -95,14 +95,13 @@ int deleteFrontDequeUsingArray(DequeUsingArray *queue)
     }
     else
     {
-        queue->front++; //incrementing front first as deletion is carried out by front and front's starting value is = -1 (Read init for clarification)
         if (queue->front == SIZE)
         {
             queue->front = 0; //making it back to 0 aka linking the last element to first one
         }
         
 
-        return queue->arr[queue->front];
+        return queue->arr[queue->front++];
     }
 }
 
@@ -122,14 +121,13 @@ int deleteRearDequeUsingArray(DequeUsingArray *queue)
     }
     else
     {
-        queue->rear--; //decrementing first as rear deletion is started from -1 and it changes to SIZE -1
         if (queue->rear == -1)
         {
             queue->rear = SIZE - 1; //making it back to 0 aka linking the last element to first one
         }
         
 
-        return queue->arr[queue->rear];
+        return queue->arr[queue->rear--];
     }
 }
 

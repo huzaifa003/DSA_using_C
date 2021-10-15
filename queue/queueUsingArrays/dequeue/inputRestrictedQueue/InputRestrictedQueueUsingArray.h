@@ -4,6 +4,7 @@
     * Deque makes it possible to insert on both sides by using both front and rear to add and delete elements
 */
 #define SIZE 20
+static int insertNo = 0; //will keep track on how many values are inserted
 typedef struct DequeUsingArray
 {
     int front;
@@ -19,12 +20,12 @@ void initDequeUsingArray(DequeUsingArray *queue)
 
 int isFullDequeUsingArray(DequeUsingArray *queue)
 {
-    return (queue->front == 0 && queue->rear == SIZE - 1) || queue->front == queue->rear + 1;
+    return (queue->front == 0 && queue->rear == SIZE - 1) || queue->front == queue->rear + 1 || insertNo == SIZE;
 }
 
 int isEmptyDequeUsingArray(DequeUsingArray *queue)
 {
-    return queue->rear == -1 || queue->front == -1;
+    return queue->rear == -1 || queue->front == -1 || insertNo == 0; //at start or after emptying :)
 }
 void insertRearDequeUsingArray(DequeUsingArray *queue, int data)
 {
@@ -49,7 +50,7 @@ void insertRearDequeUsingArray(DequeUsingArray *queue, int data)
         }
     }
     queue->arr[queue->rear] = data;
-    
+    insertNo++;
 }
 
 void insertFrontDequeUsingArray(DequeUsingArray *queue, int data)
@@ -76,7 +77,7 @@ void insertFrontDequeUsingArray(DequeUsingArray *queue, int data)
     }
 
     queue->arr[queue->front] = data;
-    
+    insertNo++;
 }
 
 int deleteFrontDequeUsingArray(DequeUsingArray *queue)
@@ -86,13 +87,6 @@ int deleteFrontDequeUsingArray(DequeUsingArray *queue)
         printf("\n-----------Queue is empty and cannot be Dequed-----------\n");
         return -2;
     }
-    else if (queue->front == queue->rear) //in case of a single element 
-    {
-        int temp  = queue->arr[queue->front];
-        queue->front = -1;
-        queue->rear = -1;
-        return temp;
-    }
     else
     {
         queue->front++; //incrementing front first as deletion is carried out by front and front's starting value is = -1 (Read init for clarification)
@@ -100,7 +94,7 @@ int deleteFrontDequeUsingArray(DequeUsingArray *queue)
         {
             queue->front = 0; //making it back to 0 aka linking the last element to first one
         }
-        
+        insertNo--;
 
         return queue->arr[queue->front];
     }
@@ -113,13 +107,6 @@ int deleteRearDequeUsingArray(DequeUsingArray *queue)
         printf("\n-----------Queue is empty and cannot be Dequed-----------\n");
         return -2;
     }
-    else if (queue->front == queue->rear) //in case of a single element 
-    {
-        int temp  = queue->arr[queue->front];
-        queue->front = -1;
-        queue->rear = -1;
-        return temp;
-    }
     else
     {
         queue->rear--; //decrementing first as rear deletion is started from -1 and it changes to SIZE -1
@@ -127,7 +114,7 @@ int deleteRearDequeUsingArray(DequeUsingArray *queue)
         {
             queue->rear = SIZE - 1; //making it back to 0 aka linking the last element to first one
         }
-        
+        insertNo--;
 
         return queue->arr[queue->rear];
     }
@@ -143,7 +130,7 @@ void displayDequeUsingArray(DequeUsingArray *queue)
     printf("\n-----------DISPLAYING DEQUE-------------\n");
     int i = queue->front, counter = 0;
 
-    while (i != queue->rear)
+    while (i != queue->rear) //till i != rear
     {
         printf("Element %d of queue is = %d\n", counter, queue->arr[i]);
         i++;
@@ -153,5 +140,5 @@ void displayDequeUsingArray(DequeUsingArray *queue)
         }
         counter++;
     }
-    printf("Element %d of queue is = %d\n", counter, queue->arr[queue->rear]); //for printing the last value
+    printf("Element %d of queue is = %d\n", counter, queue->arr[queue->rear]); //for printing the last value of rear
 }

@@ -20,7 +20,7 @@ int isEmpty(priorityQueueOneArrayUnsorted* queue)
 }
 void initQueue(priorityQueueOneArrayUnsorted* queue)
 {
-    queue->rear = -1;
+    queue->rear = -1; //here rear will be the index of element with highest priority
     queue->front = -1;
 }
 void insert(priorityQueueOneArrayUnsorted* queue, int priority, int data)
@@ -42,6 +42,11 @@ void insert(priorityQueueOneArrayUnsorted* queue, int priority, int data)
     }
     queue->data[queue->rear].data = data;
     queue->data[queue->rear].priority = priority;    
+
+    if (queue->data[queue->front].priority > queue->data[queue->front].priority) //current (rear) element priority is HIGHER (Greater than sign is cause lower is higher) than (front) elemetn priority
+    {
+        queue->front = queue->data[queue->rear].priority;
+    }
 }
 
 void display(priorityQueueOneArrayUnsorted* queue)
@@ -66,6 +71,29 @@ void display(priorityQueueOneArrayUnsorted* queue)
 
 int dequeue(priorityQueueOneArrayUnsorted* queue)
 {
+    if (isEmpty(queue))
+    {
+        printf("Empty Queue");
+        return -1;
+    }
+    
+    int temp = queue->data[queue->front].data;
+    for (int i = queue->front; i <= queue->rear; i++) //removing the highest priority element 
+    {
+        queue->data[i] = queue->data[i+1];
+    }
+    queue->rear--;
+    int tempPriorityIndex = 0; //starting from first index
+    for (int i = 0; i <= queue->rear; i++)
+    {
+
+        if(queue->data[i].priority < queue->data[tempPriorityIndex].priority)
+        {
+            tempPriorityIndex = i; //changing the index
+        }
+    }
+    queue->front = tempPriorityIndex;
+    return temp;
     
 }
 
@@ -80,6 +108,9 @@ int main() {
     insert(&queue,1,4);
 
     display(&queue);
+
+    printf("first dequeued element is = %d\n",dequeue(&queue));
+    printf("second dequeued element is = %d\n",dequeue(&queue));
     getch();
 
     return 0;

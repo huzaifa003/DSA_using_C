@@ -135,7 +135,7 @@ void displayDequeUsingArray(DequeUsingArray *queue)
 {
     if (isEmptyDequeUsingArray(queue))
     {
-        printf("\n-----------Queue is empty and cannot be Dequed-----------\n");
+        printf("\n-----------Queue is empty-----------\n");
         return;
     }
     printf("\n-----------DISPLAYING DEQUE-------------\n");

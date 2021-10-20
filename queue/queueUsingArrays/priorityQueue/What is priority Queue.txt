@@ -1,0 +1,12 @@
+What is P Queue?
+Priority Queue is a special queue where each element is assigned a Priority
+A Priority queue can use a single array with unsorted elements that will assign a Priority to each element based on structure.
+    Such a queue can be unordered or ordered 
+    For Ordered queue insertion time complexity is = O(n)
+    For Ordered queue Deletion time complexity is = O(1)
+    For unordered queue insertion time complexity is = O(1)
+    For unordered queue Deletion time complexity is = O(n)
+
+A Priority queue can also use a 2D array where 1D is used for Priority and the other one can used as single queue
+    For such a queue you have to keep track of front and rear for each row.
+    This causes allot of waste of space though it's implementation is simple.

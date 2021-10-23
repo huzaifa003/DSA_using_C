@@ -78,7 +78,7 @@ void display(priorityQueueTwoArray *queue)
         }
         for (int front = queue->front[priority]; front <= queue->rear[priority]; front++)
         {
-            if (queue->data[priority][front] == -999)
+            if (queue->data[priority][front] == -999) //sentinal value
             {
                 break;
             }

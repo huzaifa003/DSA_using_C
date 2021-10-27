@@ -5,8 +5,8 @@
 int main()
 {
 
-    insertSingly(4);
-    insertSingly(5);
+    insertFrontSingly(4);
+    insertBackSingly(5);
     displaySingly();
     printf("Length for first display  =  %d\n",getLength());
 
@@ -18,8 +18,8 @@ int main()
     displaySingly();
     printf("Length after second deletion  =  %d\n",getLength());
 
-    insertSingly(4);
-    insertSingly(5);
+    insertFrontSingly(4);
+    insertFrontSingly(5);
     displaySingly();
     printf("Length for second display  =  %d\n",getLength());
 
@@ -31,10 +31,16 @@ int main()
     displaySingly();
     printf("Length after fourth deletion  =  %d\n",getLength());
 
-    insertSingly(4);
-    insertSingly(5);
+    insertBackSingly(4);
+    insertBackSingly(5);
+    insertBackSingly(6);
+    insertBackSingly(7);
+    insertBackSingly(8);
     displaySingly();
     printf("Length for last display  =  %d\n",getLength());
+    printf("-------------------------------------\n");
+    printf("Element Deleted at Index %d is = %d\n",3,deleteAtSingly(3));
+    displaySingly();
     getch();
     return 0;
 }

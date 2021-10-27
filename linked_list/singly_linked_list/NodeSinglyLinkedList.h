@@ -11,7 +11,19 @@ typedef struct Node
 int length = 0;
 Node *head = NULL; //initializing head
 
-void insertSingly(int data)
+
+int isEmptySingly()
+{
+    return length == 0;
+}
+
+int getLength()
+{
+    return length;
+}
+
+
+void insertFrontSingly(int data)
 {
     if (head == NULL) //for first element 
     {
@@ -34,6 +46,26 @@ void insertSingly(int data)
     }
     length++;
 }
+
+void insertBackSingly(int data)
+{
+    if (head == NULL) //for first element 
+    {
+        head = (Node *)malloc(sizeof(Node)); //making a new node
+        head->data = data; //inserting data
+        head->next = NULL;
+    }
+    else
+    {
+        Node *newNode = (Node *)malloc(sizeof(Node));
+        newNode->data = data;
+        newNode->next = head;
+
+        head = newNode; //changing head to first pointer again
+    }
+    length++;
+}
+
 
 void displaySingly()
 {
@@ -94,13 +126,26 @@ int deleteLastSingly()
     }
 }
 
-int isEmptySingly()
+int deleteAtSingly(int index)
 {
-    return length == 0;
+    if (index >= getLength())
+    {        
+        printf("\n-----------Index overflow-------------\n");
+        return -1;
+    }
+    
+    Node *iterator = head;
+    {
+        for (int i = 1; i < index-1; i++)
+        {
+            iterator = iterator->next;
+        }
+        Node* temp = iterator->next;
+        iterator->next = iterator->next->next;
+        length--;
+        return temp->data;
+    }
+    
 }
 
-int getLength()
-{
-    return length;
-}
 

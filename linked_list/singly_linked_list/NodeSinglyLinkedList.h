@@ -114,7 +114,6 @@ int deleteLastSingly()
         
         while (iterator->next->next != NULL) //iterating for multiple elements 
         {
-            printf("Data is %d\n", iterator->data);
             iterator = iterator->next;
         }
         Node *temp = iterator->next;

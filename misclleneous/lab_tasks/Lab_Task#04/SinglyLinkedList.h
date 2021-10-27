@@ -69,14 +69,13 @@ void insertBack(int data)
 
 void display()
 {
-    printf("-------------------------------------\n");
+    printf("\nDisplay\n");
     struct Node *temporary = head; 
     while (temporary != NULL)
     {
         printf("Data is %d\n", temporary->data); //display data at each struct Node till its null
         temporary = temporary->next;
     }
-    printf("-------------------------------------\n");
 }
 
 int deleteFirst()
@@ -102,25 +101,22 @@ int deleteLast()
         return NULL;
     }
     
-    if (temporary->next == NULL) //for a single element aka only head
+    if (temporary->next == NULL) 
     {
         head = NULL;
-        free(head); //freeing memory
         length--;
         return temporary->data;
     }
     else
     {
         
-        while (temporary->next->next != NULL) //iterating for multiple elements 
+        while (temporary->next->next != NULL) 
         {
-            printf("Data is %d\n", temporary->data);
             temporary = temporary->next;
         }
         struct Node *temp = temporary->next;
         temporary->next = NULL;
         length--;
-        free(temporary->next);
         return temp->data;
 
     }
@@ -130,7 +126,6 @@ int deleteAt(int index)
 {
     if (index >= getLength())
     {        
-        printf("\n-----------Index overflow-------------\n");
         return -1;
     }
     

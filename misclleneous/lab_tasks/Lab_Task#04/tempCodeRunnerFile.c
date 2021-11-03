@@ -33,9 +33,6 @@ int main()
     display();
     printf("Length after deletion  =  %d\n",getLength());
 
-    printf("\nElement inserted at index 1\n");
-    insertAt(1,99);
-    display();
     getch();
     return 0;
 }

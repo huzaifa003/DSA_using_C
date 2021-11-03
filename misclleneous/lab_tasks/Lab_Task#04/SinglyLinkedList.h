@@ -66,6 +66,41 @@ void insertBack(int data)
     length++;
 }
 
+void insertAt(int index, int data)
+{
+    if (index == 0)
+    {
+        insertBack(data);
+    }
+
+    else if (index == length)
+    {
+        insertFront(data);
+    }
+
+    else if (index > length)
+    {
+        printf("Invalid");
+        return;
+    }
+
+    else 
+    {
+        struct Node* temp = head;
+        struct Node *newNode = (struct Node *)malloc(sizeof(struct Node));
+        newNode->data = data;
+        for (int i = 1; i < index; i++)
+        {
+            temp = temp->next;
+        }
+
+        newNode->next = temp->next;
+        temp->next = newNode;
+        
+    }
+    
+}
+
 
 void display()
 {

@@ -8,29 +8,37 @@ typedef struct Node
     struct Node *next;
 } Node;
 
-int length = 0;
-Node *head = NULL; //initializing head
-
-
-int isEmptySingly()
+Node *createNode(Node *head)
 {
-    return length == 0;
+    head = (Node *)malloc(sizeof(Node));
+    head = NULL;
+    return head;
 }
 
-int getLength()
+int getLength(Node *head)
 {
-    return length;
+    Node *temp = head;
+    int i;
+    for (i = 0; temp != NULL; i++)
+    {
+        temp = temp->next;
+    }
+    return i;
 }
 
-
-void insertFrontSingly(int data)
+int isEmptySingly(Node *head)
 {
-    if (head == NULL) //for first element 
+    return getLength(head) == 0;
+}
+
+Node* insertFrontSingly(Node *head, int data)
+{
+    if (head == NULL) //for first element
     {
         head = (Node *)malloc(sizeof(Node)); //making a new node
-        head->data = data; //inserting data
+        head->data = data;                   //inserting data
         head->next = NULL;
-    }
+    }   
     else
     {
         Node *iterator = head; //iterating till empty node is found
@@ -44,16 +52,18 @@ void insertFrontSingly(int data)
         }
         iterator->next = newNode; //adding node at end
     }
-    length++;
+    return head;
+
 }
 
-void insertBackSingly(int data)
+Node* insertBackSingly(Node *head, int data)
 {
-    if (head == NULL) //for first element 
+    if (head == NULL) //for first element
     {
         head = (Node *)malloc(sizeof(Node)); //making a new node
-        head->data = data; //inserting data
+        head->data = data;                   //inserting data
         head->next = NULL;
+        return head;
     }
     else
     {
@@ -63,14 +73,14 @@ void insertBackSingly(int data)
 
         head = newNode; //changing head to first pointer again
     }
-    length++;
+    return head;
+
 }
 
-
-void displaySingly()
+void displaySingly(Node *head)
 {
     printf("-------------------------------------\n");
-    Node *iterator = head; 
+    Node *iterator = head;
     while (iterator != NULL)
     {
         printf("Data is %d\n", iterator->data); //display data at each node till its null
@@ -79,72 +89,64 @@ void displaySingly()
     printf("-------------------------------------\n");
 }
 
-int deleteFirstSingly()
+int deleteFirstSingly(Node *head)
 {
     Node *temp = head;
-    if (head != NULL)  //changing head
+    if (head != NULL) //changing head
     {
         head = head->next;
-        length--;
         return temp->data;
     }
-    else 
+    else
     {
         return NULL;
     }
 }
 
-int deleteLastSingly()
+int deleteLastSingly(Node *head)
 {
     Node *iterator = head;
     if (head == NULL)
     {
         return NULL;
     }
-    
+
     if (iterator->next == NULL) //for a single element aka only head
     {
         head = NULL;
         free(head); //freeing memory
-        length--;
         return iterator->data;
     }
     else
     {
-        
-        while (iterator->next->next != NULL) //iterating for multiple elements 
+
+        while (iterator->next->next != NULL) //iterating for multiple elements
         {
             iterator = iterator->next;
         }
         Node *temp = iterator->next;
         iterator->next = NULL;
-        length--;
         free(iterator->next);
         return temp->data;
-
     }
 }
 
-int deleteAtSingly(int index)
+int deleteAtSingly(Node *head, int index)
 {
-    if (index >= getLength())
-    {        
+    if (index >= getLength(head))
+    {
         printf("\n-----------Index overflow-------------\n");
         return -1;
     }
-    
+
     Node *iterator = head;
     {
-        for (int i = 1; i < index-1; i++)
+        for (int i = 1; i < index - 1; i++)
         {
             iterator = iterator->next;
         }
-        Node* temp = iterator->next;
+        Node *temp = iterator->next;
         iterator->next = iterator->next->next;
-        length--;
         return temp->data;
     }
-    
 }
-
-

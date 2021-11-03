@@ -56,6 +56,8 @@ Node* insertFrontSingly(Node *head, int data)
 
 }
 
+
+
 Node* insertBackSingly(Node *head, int data)
 {
     if (head == NULL) //for first element
@@ -76,7 +78,36 @@ Node* insertBackSingly(Node *head, int data)
     return head;
 
 }
+void insertAtSingly(Node* head, int data, int index)
+{
+    if (index > getLength(head))
+    {
+        printf("\n-----------Index overflow-------------\n");
+        return ;
+    }
 
+    else if (index == 0)
+    {
+        insertBackSingly(head,data);
+    }
+    else if (index == getLength(head))
+    {
+        insertFrontSingly(head,data);
+    }
+    else
+    {
+        Node *newNode = (Node *)malloc(sizeof(Node));
+        newNode->data = data;
+        Node *iterator = head;
+
+        for (int i = 1; i < index - 1; i++)
+        {
+            iterator = iterator->next;
+        }
+        newNode->next = iterator->next;
+        iterator->next = newNode;
+    }
+}
 void displaySingly(Node *head)
 {
     printf("-------------------------------------\n");

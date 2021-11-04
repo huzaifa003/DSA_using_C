@@ -162,37 +162,22 @@ Node* deleteLastSingly(Node *head)
     }
 }
 
-int deleteAtSingly(Node **head, int index)
+int deleteAtSingly(Node *head, int index)
 {
-    if (index >= getLength(*head))
+    if (index >= getLength(head))
     {
         printf("\n-----------Index overflow-------------\n");
         return -1;
     }
 
-    else if (index == 0)
+    Node *iterator = head;
     {
-        int data = (*head)->data;
-        *(head) = (*head)->next;
-        return data;
-    }
-
-    Node *iterator = *head;
-    {
-        
-        
         for (int i = 1; i < index - 1; i++)
         {
             iterator = iterator->next;
         }
         Node *temp = iterator->next;
         iterator->next = iterator->next->next;
-        if (index == 5)
-        {
-            printf("Hello\n");
-            printf("Temp datais = %d\n",iterator->next->next->data);
-        }
-        
         return temp->data;
     }
 }

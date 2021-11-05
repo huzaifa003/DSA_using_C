@@ -10,7 +10,7 @@ void moveEvenAtEnd(Node *head)
         if (iterator->data % 2 == 0)
         {
             head = insertFrontSingly(head, iterator->data);
-            deleteAtSingly(&head, j);
+            head = deleteAtSingly(head, j);
             iterator = iterator->next; //moving to ndex element after deleting previous one
             continue; //dont increment j
         }

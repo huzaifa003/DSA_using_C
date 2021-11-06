@@ -1,7 +1,24 @@
 #include <stdio.h>
 #include <conio.h>
 #include <stdlib.h>
-
+/*
+    *
+    * To make multiple linked lists out of a single structure and set of methods we can declare multiple heads of same type.
+    * To ensure that each function knows the list it's acting upon we need to pass heads of each list as an argument to function.
+    * 
+    * FAQ:
+    *   Why do we need to return head if we are using pointers?
+    *       A: Cause we are changing the value of address variable itself. I.E head = (Node *)malloc(sizeof(Node)); here the value of head is not being modified but the address of head itself is modified thus we need to return it or use double pointers
+    * 
+    *   Why can't we use Global variable?
+    *       A: Turns out we CAN but then we 'd have to make each function specific to each global variable or again pass heads as arguments.
+    *   
+    *   Double Pointer vs Single Pointer vs Global Variable
+    *       Double pointer won't need return. (Not Recommended for beginners)
+    *       Single pointer needs return.
+    *       Global variable needs neither but needs seperate functions or conditions to specify the value (NOT RECOMMENDED)
+    * 
+*/
 typedef struct Node
 {
     int data;

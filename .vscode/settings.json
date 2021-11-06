@@ -3,6 +3,7 @@
         "singlylinkedlist.h": "c",
         "cmath": "c",
         "nodestackint.h": "c",
-        "nodesinglylinkedlist.h": "c"
+        "nodesinglylinkedlist.h": "c",
+        "stdio.h": "c"
     }
 }

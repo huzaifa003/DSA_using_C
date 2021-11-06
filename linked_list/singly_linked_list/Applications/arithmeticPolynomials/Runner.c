@@ -2,14 +2,13 @@
 #include <conio.h>
 #include "NodeSinglyLinkedList.h"
 
-
-void deleteDuplicates(Node* head)
+void deleteDuplicates(Node *head)
 {
-    Node* iterator = head;
+    Node *iterator = head;
     while (iterator != NULL)
     {
-        
-        Node* temp = iterator;
+
+        Node *temp = iterator;
         while (temp->next != NULL)
         {
             if (temp->next->power == iterator->power)
@@ -23,16 +22,15 @@ void deleteDuplicates(Node* head)
             }
         }
         iterator = iterator->next;
-        
     }
     printf("\n------------Expression is------------\n");
     displaySingly(head);
 }
 
-void sortList(Node* head)
+void sortList(Node *head)
 {
-    Node* iterator = head;
-    Node* temp;
+    Node *iterator = head;
+    Node *temp;
     while (iterator->next != NULL)
     {
         temp = iterator->next;
@@ -49,17 +47,13 @@ void sortList(Node* head)
                 iterator->power = power;
             }
             temp = temp->next;
-           
         }
-        iterator =iterator->next;
+        iterator = iterator->next;
     }
     deleteDuplicates(head);
-    
 }
 
-
-
-Node* makeExpression(Node *head)
+Node *makeExpression(Node *head)
 {
     int data;
     int power;
@@ -72,58 +66,55 @@ Node* makeExpression(Node *head)
             sortList(head);
             return head;
         }
-        
-        printf("Enter the Power: ");
-        scanf("%d",&power);
 
-        head = insertFrontSingly(head,data,power); 
+        printf("Enter the Power: ");
+        scanf("%d", &power);
+
+        head = insertFrontSingly(head, data, power);
     }
 }
 
-void addPolynomials(Node* head1, Node* head2, Node* head3)
+void addPolynomials(Node *head1, Node *head2, Node *head3)
 {
-    Node* iterator1 = head1;
-    Node* iterator2 = head2;
+    Node *iterator1 = head1;
+    Node *iterator2 = head2;
 
     while (iterator1 != NULL && iterator2 != NULL)
     {
         if (iterator1->power == iterator2->power)
         {
-            head3 = insertFrontSingly(head3,iterator1->data + iterator2->data, iterator1->power);
+            head3 = insertFrontSingly(head3, iterator1->data + iterator2->data, iterator1->power);
             iterator1 = iterator1->next;
             iterator2 = iterator2->next;
         }
 
         else if (iterator1->power > iterator2->power)
         {
-            head3 = insertFrontSingly(head3,iterator1->data,iterator1->power);
+            head3 = insertFrontSingly(head3, iterator1->data, iterator1->power);
             iterator1 = iterator1->next;
         }
 
         else if (iterator2->power > iterator1->power)
         {
-            head3 = insertFrontSingly(head3,iterator2->data,iterator2->power);
+            head3 = insertFrontSingly(head3, iterator2->data, iterator2->power);
             iterator2 = iterator2->next;
         }
     }
 
     while (iterator1 != NULL)
     {
-        head3 = insertFrontSingly(head3,iterator1->data,iterator1->power);
+        head3 = insertFrontSingly(head3, iterator1->data, iterator1->power);
         iterator1 = iterator1->next;
     }
 
     while (iterator2 != NULL)
     {
-        head3 = insertFrontSingly(head3,iterator2->data,iterator2->power);
+        head3 = insertFrontSingly(head3, iterator2->data, iterator2->power);
         iterator2 = iterator2->next;
     }
 
     printf("=======================Resultant Expression is============================\n");
     displaySingly(head3);
-    
-    
-    
 }
 int main(int argc, char const *argv[])
 {
@@ -134,7 +125,7 @@ int main(int argc, char const *argv[])
     head1 = makeExpression(head1);
     printf("----------------Entering Second Expression---------------\n");
     head2 = makeExpression(head2);
-    addPolynomials(head1,head2,resultantHead);
+    addPolynomials(head1, head2, resultantHead);
     getch();
     return 0;
 }

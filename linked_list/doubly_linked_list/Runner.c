@@ -1,6 +1,5 @@
 #include <stdio.h>
 #include <conio.h>
-
 #include <stdlib.h>
 #include "NodeDoublyLinkedList.h"
 
@@ -16,10 +15,10 @@ int main(int argc, char const *argv[])
     }
     
     
-    insertFrontDoubly(4);
-    insertFrontDoubly(8);
-    insertFrontDoubly(9);
-    insertBackDoubly(5);
+    insertFrontDoubly(1);
+    insertFrontDoubly(2);
+    insertFrontDoubly(3);
+    insertBackDoubly(54);
     insertBackDoubly(10);
     printf("Starting length is = %d",getLenghtDoubly());
 

@@ -169,12 +169,57 @@ int main(int argc, char const *argv[])
     head1 = makeExpression(head1);
     printf("----------------Entering Second Expression---------------\n");
     head2 = makeExpression(head2);
-    addPolynomials(head1, head2, resultantHead);
 
-    free(resultantHead);
-    resultantHead = NULL;
+    int choice;
+    while (1)
+    {
+        printf("\nPress 1 to add polynomials");
+        printf("\nPress 2 to subtract polynomials");
+        printf("\nPress 3 to re-enter expressions");
+        printf("\nPress Any Other Key To Exit");
+        scanf("%d", &choice);
 
-    subPolynomials(head1,head2,resultantHead);
+        if (choice == 1)
+        {
+            printf("\n==========Expression 1=================\n");
+            displaySingly(head1);
+
+            printf("\n==========Expression 2=================\n");
+            displaySingly(head2);
+
+            addPolynomials(head1, head2, resultantHead);
+            resultantHead = NULL;
+        }
+
+        else if (choice == 2)
+        {
+            printf("\n==========Expression 1=================\n");
+            displaySingly(head1);
+
+            printf("\n==========Expression 2=================\n");
+            displaySingly(head2);
+            
+            subPolynomials(head1, head2, resultantHead);
+            resultantHead = NULL;
+        }
+
+        else if (choice == 3)
+        {
+            head1 = NULL;
+            head2 = NULL;
+            printf("----------------Entering First Expression---------------\n");
+            head1 = makeExpression(head1);
+            printf("----------------Entering Second Expression---------------\n");
+            head2 = makeExpression(head2);
+        }
+
+        else
+        {
+            printf("========Program Exited==========");
+            break;
+        }
+    }
+
     getch();
     return 0;
 }

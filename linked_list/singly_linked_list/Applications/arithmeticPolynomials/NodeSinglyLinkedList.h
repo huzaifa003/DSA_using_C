@@ -83,7 +83,7 @@ Node *insertBackSingly(Node *head, int data, int power)
 
 void displaySingly(Node *head)
 {
-    printf("--------------DATA is  =  -------------------\n");
+    printf("---------------------------------\n");
     Node *iterator = head;
     while (iterator != NULL)
     {

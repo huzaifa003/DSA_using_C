@@ -113,9 +113,53 @@ void addPolynomials(Node *head1, Node *head2, Node *head3)
         iterator2 = iterator2->next;
     }
 
-    printf("=======================Resultant Expression is============================\n");
+    printf("=======================Resultant Addition Expression is============================\n");
     displaySingly(head3);
 }
+
+void subPolynomials(Node *head1, Node *head2, Node *head3)
+{
+    Node *iterator1 = head1;
+    Node *iterator2 = head2;
+
+    while (iterator1 != NULL && iterator2 != NULL)
+    {
+        if (iterator1->power == iterator2->power)
+        {
+            head3 = insertFrontSingly(head3, iterator1->data - iterator2->data, iterator1->power);
+            iterator1 = iterator1->next;
+            iterator2 = iterator2->next;
+        }
+
+        else if (iterator1->power > iterator2->power)
+        {
+            head3 = insertFrontSingly(head3, iterator1->data, iterator1->power);
+            iterator1 = iterator1->next;
+        }
+
+        else if (iterator2->power > iterator1->power)
+        {
+            head3 = insertFrontSingly(head3, iterator2->data, iterator2->power);
+            iterator2 = iterator2->next;
+        }
+    }
+
+    while (iterator1 != NULL)
+    {
+        head3 = insertFrontSingly(head3, iterator1->data, iterator1->power);
+        iterator1 = iterator1->next;
+    }
+
+    while (iterator2 != NULL)
+    {
+        head3 = insertFrontSingly(head3, iterator2->data, iterator2->power);
+        iterator2 = iterator2->next;
+    }
+
+    printf("=======================Resultant Subtraction Expression is============================\n");
+    displaySingly(head3);
+}
+
 int main(int argc, char const *argv[])
 {
     Node *head1 = NULL;
@@ -126,6 +170,11 @@ int main(int argc, char const *argv[])
     printf("----------------Entering Second Expression---------------\n");
     head2 = makeExpression(head2);
     addPolynomials(head1, head2, resultantHead);
+
+    free(resultantHead);
+    resultantHead = NULL;
+
+    subPolynomials(head1,head2,resultantHead);
     getch();
     return 0;
 }

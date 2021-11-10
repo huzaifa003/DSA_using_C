@@ -26,6 +26,9 @@ int main(int argc, char const *argv[])
     displayFrontwardsDoubly();
     displayBackwardsDoubly();
 
+    insertAt(7,3);
+    displayFrontwardsDoubly();
+    deleteAt(3);
     deleteLastDoubly();
 
     displayFrontwardsDoubly();

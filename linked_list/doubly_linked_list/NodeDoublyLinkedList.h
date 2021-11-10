@@ -12,6 +12,17 @@ int length = 0;
 Node* head = NULL; //points to first element
 Node* tail = NULL; //points to last element
 
+
+int getLenghtDoubly()
+{
+    return length;
+}
+
+int isEmptyDoubly()
+{
+    return length == 0;
+}
+
 void insertFrontDoubly(int data)
 {
     Node* newNode = (Node*) malloc(sizeof(Node));
@@ -62,7 +73,36 @@ void insertBackDoubly(int data)
     length++;
 }
 
+void insertAt(int data, int index)
+{
+    Node* newNode = (Node*) malloc(sizeof(Node));
+    newNode->data = data;
 
+    if (index == 0)
+    {
+        insertBackDoubly(data);
+        return;
+    }
+
+    else if (index == getLenghtDoubly())
+    {
+        insertFrontDoubly(data);
+        return;
+    }
+    
+    Node* temp = head;
+    for (int i = 1; i < index; i++)
+    {
+        temp = temp->next;
+    }
+
+    newNode->prev = temp;
+    newNode->next = temp->next;
+
+    temp->next->prev = newNode;
+    temp->next = newNode;
+    
+}
 void seperator()
 {
     printf("\n---------------------------------\n");
@@ -108,15 +148,34 @@ int  deleteFirstDoubly()
     return temp->data;
 }
 
-int getLenghtDoubly()
+
+void deleteAt(int index)
 {
-    return length;
+
+    if (index == 0)
+    {
+        deleteFirstDoubly();
+        return;
+    }
+
+    else if (index == getLenghtDoubly())
+    {
+        deleteLastDoubly();
+        return;
+    }
+    
+    Node* temp = head;
+    for (int i = 1; i < index; i++)
+    {
+        temp = temp->next;
+    }
+
+    Node* temp2 = temp->next->next;
+    temp2->prev = temp;
+    temp->next = temp2;
+
 }
 
-int isEmptyDoubly()
-{
-    return length == 0;
-}
 
 
 

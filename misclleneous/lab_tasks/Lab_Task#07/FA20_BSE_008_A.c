@@ -2,16 +2,16 @@
 #include <conio.h>
 #include <stdlib.h>
 
-typedef struct Node
-{
-    struct Node *prev;
+typedef struct Node {
+    struct Node* prev;
     int data;
-    struct Node *next;
+    struct Node* next;
 } Node;
 
 int length = 0;
-Node *head = NULL; //points to first element
-Node *tail = NULL; //points to last element
+Node* head = NULL; //points to first element
+Node* tail = NULL; //points to last element
+
 
 int getLenghtDoubly()
 {
@@ -25,7 +25,7 @@ int isEmptyDoubly()
 
 void insertFrontDoubly(int data)
 {
-    Node *newNode = (Node *)malloc(sizeof(Node));
+    Node* newNode = (Node*) malloc(sizeof(Node));
     newNode->next = NULL;
     newNode->data = data;
     if (head == NULL)
@@ -37,11 +37,13 @@ void insertFrontDoubly(int data)
     else
     {
 
-        Node *temp = tail;
 
+        Node* temp = tail;
+        
         temp->next = newNode;
         newNode->prev = temp;
         tail = newNode;
+
     }
     length++;
 }
@@ -49,7 +51,7 @@ void insertFrontDoubly(int data)
 void insertBackDoubly(int data)
 {
 
-    Node *newNode = (Node *)malloc(sizeof(Node));
+    Node* newNode = (Node*) malloc(sizeof(Node));
     newNode->next = NULL;
     newNode->data = data;
     if (head == NULL)
@@ -73,7 +75,7 @@ void insertBackDoubly(int data)
 
 void insertAt(int data, int index)
 {
-    Node *newNode = (Node *)malloc(sizeof(Node));
+    Node* newNode = (Node*) malloc(sizeof(Node));
     newNode->data = data;
 
     if (index == 0)
@@ -87,8 +89,8 @@ void insertAt(int data, int index)
         insertFrontDoubly(data);
         return;
     }
-
-    Node *temp = head;
+    
+    Node* temp = head;
     for (int i = 1; i < index; i++)
     {
         temp = temp->next;
@@ -99,6 +101,7 @@ void insertAt(int data, int index)
 
     temp->next->prev = newNode;
     temp->next = newNode;
+    
 }
 void seperator()
 {
@@ -107,42 +110,44 @@ void seperator()
 void displayFrontwardsDoubly()
 {
     seperator();
-    Node *temp = head;
+    Node* temp = head;
     while (temp != NULL)
     {
-        printf("Data Frontwards is = %d\n", temp->data);
+        printf("Data Frontwards is = %d\n",temp->data);
         temp = temp->next;
     }
+
 }
 
 void displayBackwardsDoubly()
 {
     seperator();
-    Node *temp = tail;
+    Node* temp = tail;
     while (temp != NULL)
     {
-        printf("Data Backwards is = %d\n", temp->data);
+        printf("Data Backwards is = %d\n",temp->data);
         temp = temp->prev;
     }
 }
 
 int deleteLastDoubly()
 {
-    Node *temp = tail;
+    Node* temp = tail;
     tail = tail->prev;
     tail->next = NULL;
     length--;
     return temp->data;
 }
 
-int deleteFirstDoubly()
+int  deleteFirstDoubly()
 {
-    Node *temp = head;
+    Node* temp = head;
     head = head->next;
     head->prev = NULL;
     length--;
     return temp->data;
 }
+
 
 void deleteAt(int index)
 {
@@ -158,40 +163,62 @@ void deleteAt(int index)
         deleteLastDoubly();
         return;
     }
-
-    Node *temp = head;
+    
+    Node* temp = head;
     for (int i = 1; i < index; i++)
     {
         temp = temp->next;
     }
 
-    Node *temp2 = temp->next->next;
+    Node* temp2 = temp->next->next;
     temp2->prev = temp;
     temp->next = temp2;
+
 }
 
-void removeDuplicates()
+int main(int argc, char const *argv[])
 {
-    Node *outerIterator = head;
-    Node *innerIterator = NULL;
-
-    while (outerIterator->next != NULL)
+    if (isEmptyDoubly())
     {
-        innerIterator = outerIterator;
-        while (innerIterator->next != NULL)
-        {
-            if (innerIterator->next->data == outerIterator->data)
-            {
-                innerIterator->next = innerIterator->next->next;
-                if (innerIterator->next != NULL)
-                {
-                    innerIterator->next->prev = innerIterator;
-                }
-                continue;
-            }
-            innerIterator = innerIterator->next;
-        }
-
-        outerIterator = outerIterator->next;
+        printf("List is empty before insertion\n");
     }
+    else
+    {
+        printf("There has to be some error!!");
+    }
+    
+    
+    insertFrontDoubly(1);
+    insertFrontDoubly(2);
+    insertFrontDoubly(3);
+    insertBackDoubly(54);
+    insertBackDoubly(10);
+    printf("Starting length is = %d",getLenghtDoubly());
+
+    displayFrontwardsDoubly();
+    displayBackwardsDoubly();
+
+    insertAt(7,3);
+    displayFrontwardsDoubly();
+    deleteAt(3);
+    deleteLastDoubly();
+
+    displayFrontwardsDoubly();
+    displayBackwardsDoubly();
+
+    deleteFirstDoubly();
+
+    displayFrontwardsDoubly();
+    displayBackwardsDoubly();
+    printf("\nEnding length is = %d",getLenghtDoubly());
+    if (!isEmptyDoubly())
+    {
+        printf("\n\nList is NOT empty before insertion\n");
+    }
+    else
+    {
+        printf("There has to be some error!!");
+    }
+    getch();
+    return 0;
 }

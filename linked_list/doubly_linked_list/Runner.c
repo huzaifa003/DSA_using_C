@@ -16,18 +16,18 @@ int main(int argc, char const *argv[])
     
     
     insertFrontDoubly(1);
-    insertFrontDoubly(2);
     insertFrontDoubly(3);
-    insertBackDoubly(54);
+    insertFrontDoubly(3);
+    insertBackDoubly(3);
     insertBackDoubly(10);
     printf("Starting length is = %d",getLenghtDoubly());
 
     displayFrontwardsDoubly();
     displayBackwardsDoubly();
 
-    insertAt(7,3);
+    insertAt(3,2);
     displayFrontwardsDoubly();
-    deleteAt(3);
+    deleteAt(2);
     deleteLastDoubly();
 
     displayFrontwardsDoubly();
@@ -46,6 +46,10 @@ int main(int argc, char const *argv[])
     {
         printf("There has to be some error!!");
     }
+
+    printf("\nRemoved Duplicates\n");
+    removeDuplicates();
+    displayFrontwardsDoubly();
     getch();
     return 0;
 }

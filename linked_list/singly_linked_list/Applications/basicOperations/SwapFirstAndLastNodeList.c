@@ -1,23 +1,27 @@
 #include <stdio.h>
 #include <conio.h>
 #include "NodeSinglyLinkedList.h"
-//TODO
 void swap(Node* head)
 {
     Node* firstNode = head;
     Node* lastNode;
-
+    Node* lastNodePrev;
     while (firstNode->next != NULL)
     {
+        lastNodePrev = firstNode;
         firstNode = firstNode->next;
     }
 
     lastNode = firstNode;
     firstNode = head;
 
-    int temp = head->data;
-    firstNode->data = lastNode->data;
-    lastNode->data = temp;
+    Node* temp = lastNodePrev;
+    lastNodePrev->next = firstNode;
+    lastNode->next = head->next;
+    
+    head = lastNode;
+    firstNode->next = NULL;
+
 
     printf("\n--------------AFTER EXCHANGING BOTH NODES----------\n");
 
@@ -31,7 +35,7 @@ int main(int argc, char const *argv[])
     head = insertFrontSingly(head, 5);
     head = insertFrontSingly(head, 6);
     head = insertFrontSingly(head, 6);
-    head = insertFrontSingly(head, 6);
+    head = insertFrontSingly(head, 7);
     printf("\n--------------Before EXCHANGING BOTH NODES----------\n");
     displaySingly(head);
     swap(head);

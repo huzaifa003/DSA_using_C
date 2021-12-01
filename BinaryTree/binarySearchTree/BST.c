@@ -54,7 +54,7 @@ void insert(int data)
     }
 }
 
-void displayUsingLevelOrder(treeNode* root)
+void displayUsingPreOrder(treeNode* root)
 {
     if (root == NULL)
     {
@@ -63,6 +63,28 @@ void displayUsingLevelOrder(treeNode* root)
     printf("Data is = %d\n",root->data);
     displayUsingLevelOrder(root->left);
     displayUsingLevelOrder(root->right);
+}
+
+void displayUsingInOrder(treeNode* root)
+{
+    if (root == NULL)
+    {
+        return;
+    }
+    displayUsingLevelOrder(root->left);
+    printf("Data is = %d\n",root->data);
+    displayUsingLevelOrder(root->right);
+}
+
+void displayUsingPostOrder(treeNode* root)
+{
+    if (root == NULL)
+    {
+        return;
+    }
+    displayUsingLevelOrder(root->left);
+    displayUsingLevelOrder(root->right);
+    printf("Data is = %d\n",root->data);
 }
 int main()
 {

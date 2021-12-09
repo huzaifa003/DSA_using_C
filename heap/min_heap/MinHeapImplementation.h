@@ -12,39 +12,32 @@
 */
 typedef struct MinHeapImplementation
 {
-    int maxHeap[MAX_SIZE];
+    int minHeap[MAX_SIZE];
     int size;
 } minHeapNode;
 
 void heapifyMin(minHeapNode *heapNode, int i)
 {
-    if (heapNode->size == 1)
+
+    int smallest = i;      //current element position
+    int left = 2 * i + 1;  //current left child
+    int right = 2 * i + 2; //current right child
+    if (left < heapNode->size && heapNode->minHeap[left] < heapNode->minHeap[smallest])
+        smallest = left; //checking the smallest element on both sides
+    if (right < heapNode->size && heapNode->minHeap[right] < heapNode->minHeap[smallest])
+        smallest = right;
+    if (smallest != i) //if any child is greater than parent then swap the nodes
     {
-        printf("Only 1 element so no need to heapifyMin");
-        return;
-    }
-    else
-    {
-        int smallest = i;       //current element position
-        int left = 2 * i + 1;  //current left child
-        int right = 2 * i + 2; //current right child
-        if (left < heapNode->size && heapNode->maxHeap[left] < heapNode->maxHeap[smallest])
-            smallest = left; //checking the smallest element on both sides
-        else if (right < heapNode->size && heapNode->maxHeap[right] < heapNode->maxHeap[smallest])
-            smallest = right;
-        if (smallest != i) //if any child is greater than parent then swap the nodes
-        {
-            int temp = heapNode->maxHeap[smallest];
-            heapNode->maxHeap[smallest] = heapNode->maxHeap[i];
-            heapNode->maxHeap[i] = temp;
-            heapifyMin(heapNode, smallest); //heapifyMin till root the node aka first element in array
-        }
+        int temp = heapNode->minHeap[smallest];
+        heapNode->minHeap[smallest] = heapNode->minHeap[i];
+        heapNode->minHeap[i] = temp;
+        heapifyMin(heapNode, smallest); //heapifyMin till root the node aka first element in array
     }
 }
 
 void insertMinHeap(minHeapNode *heapNode, int data)
 {
-    heapNode->maxHeap[heapNode->size] = data;
+    heapNode->minHeap[heapNode->size] = data;
     heapNode->size++;
 
     if (heapNode->size > 1)
@@ -58,9 +51,9 @@ void insertMinHeap(minHeapNode *heapNode, int data)
 
 int deleteMinHeap(minHeapNode *heapNode)
 {
-    int temp = heapNode->maxHeap[0];
-    heapNode->maxHeap[0] = heapNode->maxHeap[heapNode->size - 1];
-    heapNode->maxHeap[heapNode->size - 1] = temp;
+    int temp = heapNode->minHeap[0];
+    heapNode->minHeap[0] = heapNode->minHeap[heapNode->size - 1];
+    heapNode->minHeap[heapNode->size - 1] = temp;
 
     heapNode->size--;
     for (int i = heapNode->size / 2 - 1; i >= 0; i--) //size/2 -1 returns the first non leaf node address
@@ -70,12 +63,41 @@ int deleteMinHeap(minHeapNode *heapNode)
     return temp;
 }
 
+void sortMinHeap(minHeapNode *heapNode)
+{
+    /*
+        *
+        *To Sort Max heap in ascending order we first form the heap.
+        * Then we exchange the root and the last element aka leaf node
+        * We reduce size (Not Literally, we just don't heap the swapped element at the last as it's sorted now)
+        * Then we heapify the root node
+        * Finally we repeat the process till all the elements are sorted
+        *
+    */
+
+    for (int i = heapNode->size / 2 - 1; i >= 0; i--)
+    {
+        heapifyMin(heapNode, i); //making sure heap is properly created
+    }
+
+    int tempSize = heapNode->size;
+    for (int i = heapNode->size - 1; i >= 0; i--)
+    {
+        int temp = heapNode->minHeap[i]; //swapping root and last leaf node
+        heapNode->minHeap[i] = heapNode->minHeap[0];
+        heapNode->minHeap[0] = temp;
+
+        heapNode->size = i; //temporarily reducing size
+        heapifyMin(heapNode, 0);
+    }
+
+    heapNode->size = tempSize; //again repleneshing the size
+}
+
 void printMinHeap(minHeapNode *heapNode)
 {
     for (int i = 0; i < heapNode->size; i++)
     {
-        printf("Element %d of MinHeap is = %d\n",i,heapNode->maxHeap[i]);
+        printf("Element %d of MinHeap is = %d\n", i, heapNode->minHeap[i]);
     }
-    
 }
-

@@ -18,6 +18,11 @@ int main(int argc, char const *argv[])
 
     printMinHeap(&minHeap);
 
+    printf("\n\nSorted Heap is :\n\n");
+    sortMinHeap(&minHeap);
+    printMinHeap(&minHeap);
+
+
     getch();
     return 0;
 }

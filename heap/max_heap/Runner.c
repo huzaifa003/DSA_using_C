@@ -18,6 +18,9 @@ int main(int argc, char const *argv[])
 
     printMaxHeap(&maxHeap);
 
+    sortMaxHeap(&maxHeap);
+    printf("\n\nSorted Heap is :\n\n");
+    printMaxHeap(&maxHeap);
     getch();
     return 0;
 }

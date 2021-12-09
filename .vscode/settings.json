@@ -4,6 +4,7 @@
         "cmath": "c",
         "nodestackint.h": "c",
         "nodesinglylinkedlist.h": "c",
-        "stdio.h": "c"
+        "stdio.h": "c",
+        "maxheapimplementation.h": "c"
     }
 }

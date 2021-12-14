@@ -42,7 +42,7 @@ void insertMaxHeap(maxHeapNode *heapNode, int data)
 
     if (heapNode->size > 1)
     {
-        for (int i = heapNode->size / 2 - 1; i >= 0; i--) //size/2 -1 returns the first non leaf node address
+        for (int i = heapNode->size / 2 - 1; i >= 0; i--) //size/2 -1 returns the last non leaf node address
         {
             heapifyMax(heapNode, i);
         }
@@ -51,7 +51,7 @@ void insertMaxHeap(maxHeapNode *heapNode, int data)
 
 int deleteMaxHeap(maxHeapNode *heapNode)
 {
-    int temp = heapNode->maxHeap[0];
+    int temp = heapNode->maxHeap[0]; //swapping root and last value
     heapNode->maxHeap[0] = heapNode->maxHeap[heapNode->size - 1];
     heapNode->maxHeap[heapNode->size - 1] = temp;
 

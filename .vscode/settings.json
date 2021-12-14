@@ -5,6 +5,8 @@
         "nodestackint.h": "c",
         "nodesinglylinkedlist.h": "c",
         "stdio.h": "c",
-        "maxheapimplementation.h": "c"
+        "maxheapimplementation.h": "c",
+        "hashtableimplementation.h": "c",
+        "typeinfo": "c"
     }
 }

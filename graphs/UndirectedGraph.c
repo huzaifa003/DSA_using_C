@@ -12,15 +12,15 @@ typedef struct AdjacencyList
     AdjacencyNode *head;
 } AdjacencyList;
 
-typedef struct Graph
+typedef struct UndirectedGraph
 {
     int v;
     AdjacencyList *array;
-} Graph;
+} UndirectedGraph;
 
-Graph *createGraph(int v)
+UndirectedGraph *createGraph(int v)
 {
-    Graph *graph = malloc(sizeof(Graph));
+    UndirectedGraph *graph = malloc(sizeof(UndirectedGraph));
     graph->array = malloc(v * sizeof(AdjacencyList)); //array will hold all the heads whose size will be equal to number of vertices (v)
     graph->v = v;
 
@@ -40,7 +40,7 @@ AdjacencyNode *createAdjacencyNode(int destination)
     return newNode;
 }
 
-void addEdge(Graph *graph, int source, int destination)
+void addEdge(UndirectedGraph *graph, int source, int destination)
 {
     AdjacencyNode* iterator = graph->array[source].head;
     AdjacencyNode* newNode = createAdjacencyNode(destination);
@@ -80,7 +80,7 @@ void addEdge(Graph *graph, int source, int destination)
     }
 }
 
-void printGraph(Graph* graph)
+void printGraph(UndirectedGraph* graph)
 {
     for (int i = 0; i < graph->v; i++)
     {
@@ -97,7 +97,7 @@ void printGraph(Graph* graph)
 int main()
 {
 
-    Graph* graph = createGraph(3);
+    UndirectedGraph* graph = createGraph(3);
 
     addEdge(graph,0,1);
     addEdge(graph,1,2);

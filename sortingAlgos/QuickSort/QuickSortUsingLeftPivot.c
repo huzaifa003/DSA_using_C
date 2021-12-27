@@ -49,7 +49,7 @@ void quickSort(int arr[], int left, int right)
     }
 
     int j = partition(arr, left, right);
-    quickSort(arr, left, j);
+    quickSort(arr, left, j - 1);
     quickSort(arr, j + 1, right);
 }
 int main()

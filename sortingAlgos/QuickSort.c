@@ -20,15 +20,15 @@ int partition(int arr[], int left, int right)
     while (i < j)
     {
 
-        do
+        do //here do while is needed as we have to start from pivot and at first iteration pivot will be equal to arr[left] or arr[i] in 1st iteration
         {
             i++;
         } while (arr[i] <= pivot);
 
-        do
+         while (arr[j] > pivot) //we are using while here cause we need to swap the last element as well
         {
             j--;
-        } while (arr[j] > pivot);
+        }
 
         if (i < j)
         {
@@ -53,7 +53,7 @@ void quickSort(int arr[], int left, int right)
     quickSort(arr, j + 1, right);
 }
 int main()
-{
+{   
     createArray();
     printArray();
     quickSort(arr, 0, SIZE - 1);

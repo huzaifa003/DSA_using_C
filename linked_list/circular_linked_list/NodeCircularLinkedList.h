@@ -31,7 +31,6 @@ void insertCircular(int data)
 
         tail->next = newNode;
         tail = newNode;
-
     }
     tail->next = head;
     length++;
@@ -48,16 +47,17 @@ void displayCircular()
 
     if (iterator == NULL)
     {
-        printf("Data is %d\n",tail->data);
+        printf("Data is %d\n", tail->data);
     }
 
-    else {
+    else
+    {
 
         do
-            {
-                iterator = iterator->next;
-                printf("Data is = %d\n", iterator->data); //display data at each node till its null
-            } while (iterator != tail);
+        {
+            iterator = iterator->next;
+            printf("Data is = %d\n", iterator->data); //display data at each node till its null
+        } while (iterator != tail);
     }
 
     printf("-------------------------------------\n");
@@ -66,7 +66,7 @@ void displayCircular()
 int deleteFirstCircular()
 {
     Node *temp = head;
-    if (head != NULL)  //changing head
+    if (head != NULL) //changing head
     {
         head = head->next;
         tail->next = head;
@@ -84,9 +84,6 @@ int deleteFirstCircular()
     {
         return NULL;
     }
-
-    
-    
 }
 
 int deleteLastCircular()
@@ -128,7 +125,6 @@ int deleteLastCircular()
         }
 
         return temp->data;
-
     }
 }
 
@@ -141,4 +137,3 @@ int getLength()
 {
     return length;
 }
-

@@ -43,7 +43,7 @@ void insert(priorityQueueOneArrayUnsorted* queue, int priority, int data)
     queue->data[queue->rear].data = data;
     queue->data[queue->rear].priority = priority;    
 
-    if (queue->data[queue->front].priority > queue->data[queue->front].priority) //current (rear) element priority is HIGHER (Greater than sign is cause lower is higher) than (front) elemetn priority
+    if (queue->data[queue->front].priority > queue->data[queue->rear].priority) //current (rear) element priority is HIGHER (Greater than sign is cause lower is higher) than (front) elemetn priority
     {
         queue->front = queue->data[queue->rear].priority;
     }

@@ -90,10 +90,9 @@ void displayUsingPreOrder(BST *root)
     }
 }
 
-
-BST* minValue(BST* root)
+BST *minValue(BST *root)
 {
-    BST* iterator = root;
+    BST *iterator = root;
     while (iterator->left != NULL)
     {
         iterator = iterator->left;
@@ -102,9 +101,9 @@ BST* minValue(BST* root)
     return iterator;
 }
 
-BST* maxValue(BST* root)
+BST *maxValue(BST *root)
 {
-    BST* iterator = root;
+    BST *iterator = root;
     while (iterator->right != NULL)
     {
         iterator = iterator->right;
@@ -121,12 +120,12 @@ BST *deleteNodeBST(BST *root, int data)
 
     if (data < root->data)
     {
-        root->left = deleteNodeBST(root->left,data);
+        root->left = deleteNodeBST(root->left, data);
     }
 
     else if (data > root->data)
     {
-        root->right = deleteNodeBST(root->right,data);
+        root->right = deleteNodeBST(root->right, data);
     }
     else
     {
@@ -141,7 +140,7 @@ BST *deleteNodeBST(BST *root, int data)
             return root->right;
         }
 
-        else if (root->right == NULL) 
+        else if (root->right == NULL)
         {
             return root->left;
         }
@@ -150,17 +149,14 @@ BST *deleteNodeBST(BST *root, int data)
         {
             int tempData = minValue(root->right)->data;
             root->data = tempData;
-            root->right = deleteNodeBST(root->right,tempData);
+            root->right = deleteNodeBST(root->right, tempData);
         }
-
-
     }
 
     return root;
-
 }
 
-BST* balanceTree(BST* root, int left, int right, int inOrderBST[])
+BST *balanceTree(BST *root, int left, int right, int inOrderBST[])
 {
     if (left > right)
     {
@@ -169,43 +165,43 @@ BST* balanceTree(BST* root, int left, int right, int inOrderBST[])
 
     else
     {
-        int middle = left + (right - left)/2;
+        int middle = left + (right - left) / 2;
         root = createNewNode(inOrderBST[middle]);
-        printf("root %d\n",root->data);
-    getch();
-        root->left = balanceTree(root,left,middle - 1,inOrderBST);
-        root->right = balanceTree(root,middle+1,right,inOrderBST);
+        printf("root %d\n", root->data);
+        getch();
+        root->left = balanceTree(root, left, middle - 1, inOrderBST);
+        root->right = balanceTree(root, middle + 1, right, inOrderBST);
         return root;
     }
 }
 
-int getInorderArray(BST* root, int arr[], int i)
+int getInorderArray(BST *root, int arr[], int i)
 {
     if (root == NULL)
         return i;
     else
     {
-        i = getInorderArray(root->left,arr,i);
+        i = getInorderArray(root->left, arr, i);
         arr[i] = root->data;
         i++;
-        i = getInorderArray(root->right,arr,i);
+        i = getInorderArray(root->right, arr, i);
         return i;
     }
 }
 
-BST* balancingTreeCaller(BST* root)
+BST *balancingTreeCaller(BST *root)
 {
     int arr[100];
     int i = 0;
-    i = getInorderArray(root,arr,i);
+    i = getInorderArray(root, arr, i);
     for (int j = 0; j < i; j++)
     {
-        printf("%d ",arr[j]);
+        printf("%d ", arr[j]);
     }
-    return balanceTree(root,0,i-1, arr);
+    return balanceTree(root, 0, i - 1, arr);
 }
 
-int checkBST(BST* root)
+int checkBST(BST *root)
 {
     if (root == NULL)
     {
@@ -233,25 +229,25 @@ void print()
     printf("\n----------------------------------------------------------\n");
 }
 
-int isBST(BST* node)
+int isBST(BST *node)
 {
-  if (node == NULL)
+    if (node == NULL)
+        return 1;
+
+    /* false if the max of the left is > than us */
+    if (node->left != NULL && maxValue(node->left)->data > node->data)
+        return 0;
+
+    /* false if the min of the right is <= than us */
+    if (node->right != NULL && minValue(node->right)->data < node->data)
+        return 0;
+
+    /* false if, recursively, the left or right is not a BST */
+    if (!isBST(node->left) || !isBST(node->right))
+        return 0;
+
+    /* passing all that, it's a BST */
     return 1;
-     
-  /* false if the max of the left is > than us */
-  if (node->left!=NULL && maxValue(node->left)->data > node->data)
-    return 0;
-     
-  /* false if the min of the right is <= than us */
-  if (node->right!=NULL && minValue(node->right)->data < node->data)
-    return 0;
-   
-  /* false if, recursively, the left or right is not a BST */
-  if (!isBST(node->left) || !isBST(node->right))
-    return 0;
-     
-  /* passing all that, it's a BST */
-  return 1;
 }
 int main()
 {
@@ -261,17 +257,17 @@ int main()
     root = insertInBSTusingRecursion(root, 1);
     root = insertInBSTusingRecursion(root, 2);
     root = insertInBSTusingRecursion(root, 3);
-    printf("CHECK BST is = %d\n",checkBST(root));
+    printf("CHECK BST is = %d\n", checkBST(root));
     print();
     displayInOrderRecursive(root);
 
-    root = deleteNodeBST(root,3);
+    root = deleteNodeBST(root, 3);
     print();
 
     displayInOrderRecursive(root);
 
-    BST* root2 = NULL;
-    root2 = insertInBSTusingIteration(root2,3);
+    BST *root2 = NULL;
+    root2 = insertInBSTusingIteration(root2, 3);
     root2->left = createNewNode(2);
     root2->right = createNewNode(5);
     root2->left->left = createNewNode(1);
@@ -279,16 +275,16 @@ int main()
     print();
     displayInOrderRecursive(root2);
     print();
-    printf("CHECK BST is = %d\n",checkBST(root2));
+    printf("CHECK BST is = %d\n", checkBST(root2));
 
-    BST* root3 = NULL;
-    root3 = insertInBSTusingIteration(root3,7);
-    root3 = insertInBSTusingIteration(root3,6);
-    root3 = insertInBSTusingIteration(root3,5);
-    root3 = insertInBSTusingIteration(root3,4);
-    root3 = insertInBSTusingIteration(root3,3);
-    root3 = insertInBSTusingIteration(root3,2);
-    root3 = insertInBSTusingIteration(root3,1);
+    BST *root3 = NULL;
+    root3 = insertInBSTusingIteration(root3, 7);
+    root3 = insertInBSTusingIteration(root3, 6);
+    root3 = insertInBSTusingIteration(root3, 5);
+    root3 = insertInBSTusingIteration(root3, 4);
+    root3 = insertInBSTusingIteration(root3, 3);
+    root3 = insertInBSTusingIteration(root3, 2);
+    root3 = insertInBSTusingIteration(root3, 1);
 
     displayUsingPreOrder(root3);
     root3 = balancingTreeCaller(root3);

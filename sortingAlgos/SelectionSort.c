@@ -9,20 +9,22 @@ int *selectionSort(int arr[])
     for (int i = 0; i < SIZE - 1; i++)
     {
         min = arr[i];
-        minIndex = i;
-
-        for (int j = i + 1; j < SIZE; j++)
+    
+        int j;
+        int k;
+        for (j = i + 1; j < SIZE; j++)
         {
             if (arr[j] < min)
             {
                 min = arr[j];
-                minIndex = j;
+                k = j;
             }
         }
         if (min != arr[i])
         {
-            arr[minIndex] = arr[i];
+            int temp = arr[i];
             arr[i] = min;
+            arr[k] = temp;
         }
     }
     return arr;

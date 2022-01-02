@@ -2,7 +2,7 @@
 
 int *insertionSort(int arr[])
 {
-    for (int i = 0, j = 1; i < SIZE - 1; i++,j++)
+    for (int i = 0, j = 1; j < SIZE - 1; i++,j++)
     {
         if (arr[j] < arr[i])
         {
